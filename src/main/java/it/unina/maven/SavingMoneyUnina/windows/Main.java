@@ -91,7 +91,7 @@ public class Main extends JFrame {
 		lblNewLabel.setBounds(21, 17, 96, 19);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Giancarlo");
+		JLabel lblNewLabel_1 = new JLabel("Password");
 		lblNewLabel_1.setBounds(21, 68, 96, 13);
 		contentPane.add(lblNewLabel_1);
 	}
