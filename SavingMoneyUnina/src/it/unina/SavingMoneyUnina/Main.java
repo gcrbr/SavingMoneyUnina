@@ -3,7 +3,8 @@ package it.unina.SavingMoneyUnina;
 public class Main {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		String ciao = "ciao";
+		System.out.println(ciao);
 
 	}
 
