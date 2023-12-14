@@ -68,7 +68,7 @@ public class Main extends JFrame {
 		contentPane.add(password);
 		contentPane.add(Accedi);
 		
-		JLabel lblNewLabel = new JLabel("Email");
+		JLabel lblNewLabel = new JLabel("fhsdfjksdhfsd");
 		lblNewLabel.setBounds(21, 17, 96, 19);
 		contentPane.add(lblNewLabel);
 		
