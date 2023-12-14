@@ -1,4 +1,5 @@
 package it.unina.maven.SavingMoneyUnina.windows;
+import java.util.*;
 
 import java.awt.EventQueue;
 
@@ -7,11 +8,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class Main extends JFrame {
 
@@ -52,8 +55,24 @@ public class Main extends JFrame {
 		JButton Accedi = new JButton("Accedi");
 		Accedi.setBounds(21, 124, 212, 21);
 		Accedi.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {		
+				if(!email.getText().equals("") && password.getPassword().length != 0){
+					PaginaPrincipale p = new PaginaPrincipale();
+					if(email.getText().equals("salvatore") && Arrays.equals("1234".toCharArray(), password.getPassword())){
+						setVisible(false);
+						p.setVisible(true);
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Email e Password sbagliati");
+					}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Email e Password vuoti");
+				}
+				
 			}
+			
+			
 		});
 		contentPane.setLayout(null);
 		
