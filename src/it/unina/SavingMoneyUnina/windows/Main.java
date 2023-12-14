@@ -6,7 +6,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-<<<<<<< HEAD
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -14,8 +13,6 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.Color;
 import javax.swing.JLabel;
-=======
->>>>>>> e4653daa1d90dd206b2a0909b2464dc0c13c5433
 
 public class Main extends JFrame {
 
@@ -46,7 +43,7 @@ public class Main extends JFrame {
 	public Main() {
 		setTitle("Accedi");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 250, 314);
+		setBounds(100, 100, 251, 193);
 		contentPane = new JPanel();
 		contentPane.setForeground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -54,7 +51,7 @@ public class Main extends JFrame {
 		setContentPane(contentPane);
 		
 		JButton Accedi = new JButton("Accedi");
-		Accedi.setBounds(21, 140, 78, 21);
+		Accedi.setBounds(21, 124, 212, 21);
 		Accedi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -62,22 +59,22 @@ public class Main extends JFrame {
 		contentPane.setLayout(null);
 		
 		email = new JTextField();
-		email.setBounds(21, 62, 96, 19);
+		email.setBounds(21, 37, 212, 19);
 		contentPane.add(email);
 		email.setColumns(10);
 		
 		password = new JPasswordField();
 		password.setBackground(new Color(255, 255, 255));
-		password.setBounds(21, 108, 96, 19);
+		password.setBounds(21, 93, 212, 19);
 		contentPane.add(password);
 		contentPane.add(Accedi);
 		
 		JLabel lblNewLabel = new JLabel("Email");
-		lblNewLabel.setBounds(21, 39, 96, 19);
+		lblNewLabel.setBounds(21, 17, 96, 19);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Password");
-		lblNewLabel_1.setBounds(21, 85, 96, 13);
+		lblNewLabel_1.setBounds(21, 68, 96, 13);
 		contentPane.add(lblNewLabel_1);
 	}
 }
