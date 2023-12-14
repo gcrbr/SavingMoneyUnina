@@ -68,11 +68,11 @@ public class Main extends JFrame {
 		contentPane.add(password);
 		contentPane.add(Accedi);
 		
-		JLabel lblNewLabel = new JLabel("gyjikhghcj");
+		JLabel lblNewLabel = new JLabel("Email");
 		lblNewLabel.setBounds(21, 17, 96, 19);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Password");
+		JLabel lblNewLabel_1 = new JLabel("Giancarlo");
 		lblNewLabel_1.setBounds(21, 68, 96, 13);
 		contentPane.add(lblNewLabel_1);
 	}
