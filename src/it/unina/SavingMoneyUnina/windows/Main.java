@@ -2,9 +2,11 @@ package it.unina.SavingMoneyUnina.windows;
 
 import java.awt.EventQueue;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+<<<<<<< HEAD
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -12,6 +14,8 @@ import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.Color;
 import javax.swing.JLabel;
+=======
+>>>>>>> e4653daa1d90dd206b2a0909b2464dc0c13c5433
 
 public class Main extends JFrame {
 
