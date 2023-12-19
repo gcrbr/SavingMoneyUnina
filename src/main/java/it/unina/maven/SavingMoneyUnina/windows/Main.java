@@ -1,24 +1,24 @@
 package it.unina.maven.SavingMoneyUnina.windows;
-import java.util.*;
-
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Arrays;
 
-import javax.swing.BorderFactory;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.event.ActionListener;
-import java.util.Arrays;
-import java.awt.event.ActionEvent;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
-import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import java.awt.Font;
-import javax.swing.border.LineBorder;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 public class Main extends JFrame {
 
@@ -49,9 +49,10 @@ public class Main extends JFrame {
 	 * Create the frame.
 	 */
 	public Main() {
+		setResizable(false);
 		setTitle("SavingMoneyUnina");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 300, 253);
+		setBounds(100, 100, 590, 308);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(28, 21, 41));
 		contentPane.setForeground(new Color(0, 0, 0));
@@ -59,9 +60,9 @@ public class Main extends JFrame {
 
 		setContentPane(contentPane);
 		
-		JButton Accedi = new JButton("Accedi");
+		JButton Accedi = new JButton("ACCEDI");
 		Accedi.setFont(new Font("Helvetica", Font.PLAIN, 14));
-		Accedi.setBounds(20, 163, 258, 35);
+		Accedi.setBounds(291, 192, 258, 30);
 		Accedi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {		
 				if(!email.getText().equals("") && password.getPassword().length != 0){
@@ -89,7 +90,7 @@ public class Main extends JFrame {
 		email = new JTextField();
 		email.setFont(new Font("Helvetica", Font.PLAIN, 13));
 		email.setBackground(new Color(255, 255, 255));
-		email.setBounds(20, 39, 258, 27);
+		email.setBounds(291, 68, 258, 27);
 		contentPane.add(email);
 		email.setColumns(10);
 		email.setBorder(new CompoundBorder(new LineBorder(new Color(172, 163, 175)), new EmptyBorder(5, 5, 5, 5)));
@@ -97,7 +98,7 @@ public class Main extends JFrame {
 		password = new JPasswordField();
 		password.setFont(new Font("Helvetica", Font.PLAIN, 13));
 		password.setBackground(new Color(255, 255, 255));
-		password.setBounds(20, 111, 258, 27);
+		password.setBounds(291, 140, 258, 27);
 		contentPane.add(password);
 		contentPane.add(Accedi);
 		password.setColumns(10);
@@ -107,13 +108,22 @@ public class Main extends JFrame {
 		lblNewLabel_1 = new JLabel("EMAIL");
 		lblNewLabel_1.setForeground(new Color(172, 163, 175));
 		lblNewLabel_1.setFont(new Font("Helvetica", Font.PLAIN, 13));
-		lblNewLabel_1.setBounds(20, 21, 61, 16);
+		lblNewLabel_1.setBounds(291, 50, 61, 16);
 		contentPane.add(lblNewLabel_1);
 		
 		lblNewLabel_2 = new JLabel("PASSWORD");
 		lblNewLabel_2.setForeground(new Color(172, 163, 175));
 		lblNewLabel_2.setFont(new Font("Helvetica", Font.PLAIN, 13));
-		lblNewLabel_2.setBounds(20, 92, 76, 16);
+		lblNewLabel_2.setBounds(291, 121, 76, 16);
 		contentPane.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel = new JLabel("");
+		try {
+			lblNewLabel.setIcon(new ImageIcon(ImageIO.read(this.getClass().getResourceAsStream("/logo.png"))));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		lblNewLabel.setBounds(44, 42, 206, 191);
+		contentPane.add(lblNewLabel);
 	}
 }
