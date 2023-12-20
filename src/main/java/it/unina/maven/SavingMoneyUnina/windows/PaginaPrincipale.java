@@ -1,4 +1,4 @@
-package screens;
+package it.unina.maven.SavingMoneyUnina.windows;
 
 import java.awt.Color;
 import java.awt.EventQueue;
