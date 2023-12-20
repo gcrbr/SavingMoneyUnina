@@ -1,6 +1,8 @@
 package it.unina.maven.SavingMoneyUnina.windows;
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -25,18 +27,23 @@ public class PaginaPrincipale extends JFrame {
 	public PaginaPrincipale() {
 		setTitle("Pagina Principale");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 650, 349);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(28, 21, 41));
+		contentPane.setForeground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel JLabel = new JLabel("Numero Carta");
-		JLabel.setBounds(150, 29, 98, 20);
+		JLabel JLabel = new JLabel("NUMERO CARTA");
+		JLabel.setForeground(new Color(172, 163, 175));
+		JLabel.setFont(new Font("Helvetica", Font.PLAIN, 13));
+		JLabel.setBounds(188, 69, 258, 20);
 		contentPane.add(JLabel);
 		
-		JButton bottoneAggiungi = new JButton("Aggiungi");
+		JButton bottoneAggiungi = new JButton("AGGIUNGI");
+		bottoneAggiungi.setFont(new Font("Dialog", Font.PLAIN, 14));
 		bottoneAggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(numeroCarta.getText().isEmpty()) {
@@ -44,11 +51,17 @@ public class PaginaPrincipale extends JFrame {
 				}
 			}
 		});
-		bottoneAggiungi.setBounds(150, 110, 98, 27);
+		bottoneAggiungi.setBackground(new Color(53, 45, 72));
+		bottoneAggiungi.setForeground(new Color(255, 255, 255));
+		bottoneAggiungi.setOpaque(true);
+		bottoneAggiungi.setBorderPainted(false);
+		bottoneAggiungi.setBounds(189, 153, 257, 27);
 		contentPane.add(bottoneAggiungi);
 		
 		numeroCarta = new JTextField();
-		numeroCarta.setBounds(150, 59, 96, 19);
+		numeroCarta.setFont(new Font("Helvetica", Font.PLAIN, 13));
+		numeroCarta.setBackground(new Color(255, 255, 255));
+		numeroCarta.setBounds(187, 99, 258, 27);
 		contentPane.add(numeroCarta);
 		numeroCarta.setColumns(10);
 	}
