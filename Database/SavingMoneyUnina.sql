@@ -5,7 +5,7 @@
 -- Dumped from database version 16.0
 -- Dumped by pg_dump version 16.0
 
--- Started on 2024-01-25 15:23:38
+-- Started on 2024-01-25 16:35:24
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -585,7 +585,7 @@ ALTER TABLE ONLY "SavingMoneyUnina".contocorrente
     ADD CONSTRAINT numerocarta_fk FOREIGN KEY (numerocarta) REFERENCES "SavingMoneyUnina".carta(numero) ON DELETE CASCADE;
 
 
--- Completed on 2024-01-25 15:23:38
+-- Completed on 2024-01-25 16:35:24
 
 --
 -- PostgreSQL database dump complete
