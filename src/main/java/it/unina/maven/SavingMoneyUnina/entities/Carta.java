@@ -9,6 +9,7 @@ public class Carta {
 	private String tipo;
 	private double plafond;
 	private double limitespesa;
+	private ContoCorrente contoAssociato;
 	
 	public String getNumero() {
 		return numero;
@@ -58,6 +59,14 @@ public class Carta {
 		this.limitespesa = limitespesa;
 	}
 	
+	public ContoCorrente getContoAssociato() {
+		return contoAssociato;
+	}
+
+	public void setContoAssociato(ContoCorrente contoAssociato) {
+		this.contoAssociato = contoAssociato;
+	}
+
 	public boolean isCredito() {
 		return getTipo().equals("credito");
 	}
