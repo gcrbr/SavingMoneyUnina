@@ -1,4 +1,4 @@
-package it.unina.maven.SavingMoneyUnina.windows;
+package it.unina.maven.SavingMoneyUnina;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -19,6 +19,8 @@ import javax.swing.JTextField;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+
+import it.unina.maven.SavingMoneyUnina.boundaries.Login;
 
 public class Main extends JFrame {
 
@@ -66,7 +68,7 @@ public class Main extends JFrame {
 		Accedi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {		
 				if(!email.getText().equals("") && password.getPassword().length != 0){
-					PaginaPrincipale p = new PaginaPrincipale();
+					Login p = new Login();
 					if(email.getText().equals("salvatore") && Arrays.equals("1234".toCharArray(), password.getPassword())){
 						setVisible(false);
 						p.setVisible(true);

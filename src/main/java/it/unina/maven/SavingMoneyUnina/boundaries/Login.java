@@ -1,4 +1,4 @@
-package it.unina.maven.SavingMoneyUnina.windows;
+package it.unina.maven.SavingMoneyUnina.boundaries;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -15,7 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 
-public class PaginaPrincipale extends JFrame {
+public class Login extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -24,7 +24,7 @@ public class PaginaPrincipale extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PaginaPrincipale() {
+	public Login() {
 		setTitle("Pagina Principale");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 650, 349);
