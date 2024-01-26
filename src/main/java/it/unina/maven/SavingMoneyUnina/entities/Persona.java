@@ -64,6 +64,5 @@ public class Persona {
 		this.utente = utente;
 	}
 
-
 }
 

@@ -5,7 +5,7 @@
 -- Dumped from database version 16.0
 -- Dumped by pg_dump version 16.0
 
--- Started on 2024-01-26 15:14:38
+-- Started on 2024-01-26 15:57:17
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -193,7 +193,7 @@ SET default_table_access_method = heap;
 CREATE TABLE "SavingMoneyUnina".carta (
     numero character varying(16) NOT NULL,
     scadenza date NOT NULL,
-    cvv integer NOT NULL,
+    cvv character varying(3) NOT NULL,
     plafond double precision NOT NULL,
     limitespesa double precision NOT NULL,
     tipo character varying NOT NULL,
@@ -653,7 +653,7 @@ ALTER TABLE ONLY "SavingMoneyUnina".contocorrente
     ADD CONSTRAINT numerocarta_fk FOREIGN KEY (numerocarta) REFERENCES "SavingMoneyUnina".carta(numero);
 
 
--- Completed on 2024-01-26 15:14:38
+-- Completed on 2024-01-26 15:57:18
 
 --
 -- PostgreSQL database dump complete
