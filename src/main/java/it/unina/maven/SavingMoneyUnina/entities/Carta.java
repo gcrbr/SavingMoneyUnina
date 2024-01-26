@@ -74,5 +74,5 @@ public class Carta {
 	public boolean isDebito() {
 		return getTipo().equals("debito");
 	}
-	
+
 }
