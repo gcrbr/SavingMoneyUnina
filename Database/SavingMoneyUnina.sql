@@ -5,7 +5,7 @@
 -- Dumped from database version 16.0
 -- Dumped by pg_dump version 16.0
 
--- Started on 2024-01-26 14:49:12
+-- Started on 2024-01-26 15:14:38
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -38,7 +38,7 @@ COMMENT ON SCHEMA "SavingMoneyUnina" IS 'standard public schema';
 
 
 --
--- TOC entry 239 (class 1255 OID 17144)
+-- TOC entry 240 (class 1255 OID 17144)
 -- Name: inserisci_parolechiave_multiple(integer, character varying); Type: PROCEDURE; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -152,7 +152,7 @@ $$;
 ALTER FUNCTION "SavingMoneyUnina".limitespesa_plafond_check_f() OWNER TO postgres;
 
 --
--- TOC entry 240 (class 1255 OID 17097)
+-- TOC entry 239 (class 1255 OID 17097)
 -- Name: parolechiave_limite_check_f(); Type: FUNCTION; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -168,8 +168,6 @@ begin
 	INTO conteggioid_v
 	FROM "SavingMoneyUnina".parolachiave
 	WHERE idportafogli=NEW.idportafogli;
-	
-	raise notice 'AAA%', conteggioid_v;
 
 	IF  conteggioid_v >= 5 THEN
 		RAISE EXCEPTION 'Ci sono già 5 parole';
@@ -655,7 +653,7 @@ ALTER TABLE ONLY "SavingMoneyUnina".contocorrente
     ADD CONSTRAINT numerocarta_fk FOREIGN KEY (numerocarta) REFERENCES "SavingMoneyUnina".carta(numero);
 
 
--- Completed on 2024-01-26 14:49:12
+-- Completed on 2024-01-26 15:14:38
 
 --
 -- PostgreSQL database dump complete
