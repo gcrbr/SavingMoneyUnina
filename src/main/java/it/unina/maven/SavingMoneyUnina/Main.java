@@ -35,6 +35,7 @@ public class Main extends JFrame {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		ConnectionDatabase c = new ConnectionDatabase();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
