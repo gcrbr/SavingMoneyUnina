@@ -2,10 +2,10 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 16.0
--- Dumped by pg_dump version 16.0
+-- Dumped from database version 16.1
+-- Dumped by pg_dump version 16.1
 
--- Started on 2024-01-26 15:57:17
+-- Started on 2024-01-29 13:54:42 CET
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -19,7 +19,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 6 (class 2615 OID 2200)
+-- TOC entry 7 (class 2615 OID 16398)
 -- Name: SavingMoneyUnina; Type: SCHEMA; Schema: -; Owner: pg_database_owner
 --
 
@@ -29,8 +29,8 @@ CREATE SCHEMA "SavingMoneyUnina";
 ALTER SCHEMA "SavingMoneyUnina" OWNER TO pg_database_owner;
 
 --
--- TOC entry 4918 (class 0 OID 0)
--- Dependencies: 6
+-- TOC entry 3675 (class 0 OID 0)
+-- Dependencies: 7
 -- Name: SCHEMA "SavingMoneyUnina"; Type: COMMENT; Schema: -; Owner: pg_database_owner
 --
 
@@ -38,7 +38,7 @@ COMMENT ON SCHEMA "SavingMoneyUnina" IS 'standard public schema';
 
 
 --
--- TOC entry 240 (class 1255 OID 17144)
+-- TOC entry 229 (class 1255 OID 16399)
 -- Name: inserisci_parolechiave_multiple(integer, character varying); Type: PROCEDURE; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -66,7 +66,7 @@ $$;
 ALTER PROCEDURE "SavingMoneyUnina".inserisci_parolechiave_multiple(IN portafogli integer, IN lista character varying) OWNER TO postgres;
 
 --
--- TOC entry 242 (class 1255 OID 17145)
+-- TOC entry 230 (class 1255 OID 16400)
 -- Name: limitespesa_check_f(); Type: FUNCTION; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -109,7 +109,7 @@ $$;
 ALTER FUNCTION "SavingMoneyUnina".limitespesa_check_f() OWNER TO postgres;
 
 --
--- TOC entry 241 (class 1255 OID 17095)
+-- TOC entry 231 (class 1255 OID 16401)
 -- Name: limitespesa_plafond_check_f(); Type: FUNCTION; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -152,7 +152,7 @@ $$;
 ALTER FUNCTION "SavingMoneyUnina".limitespesa_plafond_check_f() OWNER TO postgres;
 
 --
--- TOC entry 239 (class 1255 OID 17097)
+-- TOC entry 232 (class 1255 OID 16402)
 -- Name: parolechiave_limite_check_f(); Type: FUNCTION; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -186,7 +186,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- TOC entry 219 (class 1259 OID 16900)
+-- TOC entry 217 (class 1259 OID 16403)
 -- Name: carta; Type: TABLE; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -205,7 +205,7 @@ CREATE TABLE "SavingMoneyUnina".carta (
 ALTER TABLE "SavingMoneyUnina".carta OWNER TO postgres;
 
 --
--- TOC entry 224 (class 1259 OID 16930)
+-- TOC entry 218 (class 1259 OID 16410)
 -- Name: categoria; Type: TABLE; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -217,7 +217,7 @@ CREATE TABLE "SavingMoneyUnina".categoria (
 ALTER TABLE "SavingMoneyUnina".categoria OWNER TO postgres;
 
 --
--- TOC entry 218 (class 1259 OID 16895)
+-- TOC entry 219 (class 1259 OID 16415)
 -- Name: contocorrente; Type: TABLE; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -232,7 +232,7 @@ CREATE TABLE "SavingMoneyUnina".contocorrente (
 ALTER TABLE "SavingMoneyUnina".contocorrente OWNER TO postgres;
 
 --
--- TOC entry 227 (class 1259 OID 17130)
+-- TOC entry 220 (class 1259 OID 16420)
 -- Name: parolachiave; Type: TABLE; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -245,7 +245,7 @@ CREATE TABLE "SavingMoneyUnina".parolachiave (
 ALTER TABLE "SavingMoneyUnina".parolachiave OWNER TO postgres;
 
 --
--- TOC entry 216 (class 1259 OID 16881)
+-- TOC entry 221 (class 1259 OID 16425)
 -- Name: persona; Type: TABLE; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -262,20 +262,21 @@ CREATE TABLE "SavingMoneyUnina".persona (
 ALTER TABLE "SavingMoneyUnina".persona OWNER TO postgres;
 
 --
--- TOC entry 223 (class 1259 OID 16916)
+-- TOC entry 222 (class 1259 OID 16430)
 -- Name: portafogli; Type: TABLE; Schema: SavingMoneyUnina; Owner: postgres
 --
 
 CREATE TABLE "SavingMoneyUnina".portafogli (
     nome character varying NOT NULL,
-    idportafogli integer NOT NULL
+    idportafogli integer NOT NULL,
+    email character varying NOT NULL
 );
 
 
 ALTER TABLE "SavingMoneyUnina".portafogli OWNER TO postgres;
 
 --
--- TOC entry 225 (class 1259 OID 17102)
+-- TOC entry 223 (class 1259 OID 16435)
 -- Name: portafogli_categoria; Type: TABLE; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -288,7 +289,7 @@ CREATE TABLE "SavingMoneyUnina".portafogli_categoria (
 ALTER TABLE "SavingMoneyUnina".portafogli_categoria OWNER TO postgres;
 
 --
--- TOC entry 222 (class 1259 OID 16915)
+-- TOC entry 224 (class 1259 OID 16440)
 -- Name: portafogli_idportafogli_seq; Type: SEQUENCE; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -303,7 +304,7 @@ ALTER TABLE "SavingMoneyUnina".portafogli ALTER COLUMN idportafogli ADD GENERATE
 
 
 --
--- TOC entry 221 (class 1259 OID 16908)
+-- TOC entry 225 (class 1259 OID 16441)
 -- Name: transazione; Type: TABLE; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -322,7 +323,7 @@ CREATE TABLE "SavingMoneyUnina".transazione (
 ALTER TABLE "SavingMoneyUnina".transazione OWNER TO postgres;
 
 --
--- TOC entry 220 (class 1259 OID 16907)
+-- TOC entry 226 (class 1259 OID 16447)
 -- Name: transazione_idtransazione_seq; Type: SEQUENCE; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -337,7 +338,7 @@ ALTER TABLE "SavingMoneyUnina".transazione ALTER COLUMN idtransazione ADD GENERA
 
 
 --
--- TOC entry 226 (class 1259 OID 17117)
+-- TOC entry 227 (class 1259 OID 16448)
 -- Name: transazione_portafogli; Type: TABLE; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -350,7 +351,7 @@ CREATE TABLE "SavingMoneyUnina".transazione_portafogli (
 ALTER TABLE "SavingMoneyUnina".transazione_portafogli OWNER TO postgres;
 
 --
--- TOC entry 217 (class 1259 OID 16888)
+-- TOC entry 228 (class 1259 OID 16451)
 -- Name: utente; Type: TABLE; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -364,8 +365,8 @@ CREATE TABLE "SavingMoneyUnina".utente (
 ALTER TABLE "SavingMoneyUnina".utente OWNER TO postgres;
 
 --
--- TOC entry 4904 (class 0 OID 16900)
--- Dependencies: 219
+-- TOC entry 3658 (class 0 OID 16403)
+-- Dependencies: 217
 -- Data for Name: carta; Type: TABLE DATA; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -375,8 +376,8 @@ COPY "SavingMoneyUnina".carta (numero, scadenza, cvv, plafond, limitespesa, tipo
 
 
 --
--- TOC entry 4909 (class 0 OID 16930)
--- Dependencies: 224
+-- TOC entry 3659 (class 0 OID 16410)
+-- Dependencies: 218
 -- Data for Name: categoria; Type: TABLE DATA; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -388,8 +389,8 @@ Finanze
 
 
 --
--- TOC entry 4903 (class 0 OID 16895)
--- Dependencies: 218
+-- TOC entry 3660 (class 0 OID 16415)
+-- Dependencies: 219
 -- Data for Name: contocorrente; Type: TABLE DATA; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -399,21 +400,21 @@ COPY "SavingMoneyUnina".contocorrente (saldo, iban, email, numerocarta) FROM std
 
 
 --
--- TOC entry 4912 (class 0 OID 17130)
--- Dependencies: 227
+-- TOC entry 3661 (class 0 OID 16420)
+-- Dependencies: 220
 -- Data for Name: parolachiave; Type: TABLE DATA; Schema: SavingMoneyUnina; Owner: postgres
 --
 
 COPY "SavingMoneyUnina".parolachiave (parola, idportafogli) FROM stdin;
-a	1
-b	1
-c	1
+booking	3
+airbnb	3
+ryanair	3
 \.
 
 
 --
--- TOC entry 4901 (class 0 OID 16881)
--- Dependencies: 216
+-- TOC entry 3662 (class 0 OID 16425)
+-- Dependencies: 221
 -- Data for Name: persona; Type: TABLE DATA; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -423,30 +424,30 @@ Salvatore	Brandi	Via Duomo	Italia	000	Napoli
 
 
 --
--- TOC entry 4908 (class 0 OID 16916)
--- Dependencies: 223
+-- TOC entry 3663 (class 0 OID 16430)
+-- Dependencies: 222
 -- Data for Name: portafogli; Type: TABLE DATA; Schema: SavingMoneyUnina; Owner: postgres
 --
 
-COPY "SavingMoneyUnina".portafogli (nome, idportafogli) FROM stdin;
-Estate 2023	1
+COPY "SavingMoneyUnina".portafogli (nome, idportafogli, email) FROM stdin;
+Estate 2023	3	ciao
 \.
 
 
 --
--- TOC entry 4910 (class 0 OID 17102)
--- Dependencies: 225
+-- TOC entry 3664 (class 0 OID 16435)
+-- Dependencies: 223
 -- Data for Name: portafogli_categoria; Type: TABLE DATA; Schema: SavingMoneyUnina; Owner: postgres
 --
 
 COPY "SavingMoneyUnina".portafogli_categoria (idportafogli, nomecategoria) FROM stdin;
-1	Svago
+3	Svago
 \.
 
 
 --
--- TOC entry 4906 (class 0 OID 16908)
--- Dependencies: 221
+-- TOC entry 3666 (class 0 OID 16441)
+-- Dependencies: 225
 -- Data for Name: transazione; Type: TABLE DATA; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -455,8 +456,8 @@ COPY "SavingMoneyUnina".transazione (valore, data, descrizione, tipo, altroiban,
 
 
 --
--- TOC entry 4911 (class 0 OID 17117)
--- Dependencies: 226
+-- TOC entry 3668 (class 0 OID 16448)
+-- Dependencies: 227
 -- Data for Name: transazione_portafogli; Type: TABLE DATA; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -465,8 +466,8 @@ COPY "SavingMoneyUnina".transazione_portafogli (idtransazione, idportafogli) FRO
 
 
 --
--- TOC entry 4902 (class 0 OID 16888)
--- Dependencies: 217
+-- TOC entry 3669 (class 0 OID 16451)
+-- Dependencies: 228
 -- Data for Name: utente; Type: TABLE DATA; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -476,17 +477,17 @@ ciao	1234	000
 
 
 --
--- TOC entry 4919 (class 0 OID 0)
--- Dependencies: 222
+-- TOC entry 3676 (class 0 OID 0)
+-- Dependencies: 224
 -- Name: portafogli_idportafogli_seq; Type: SEQUENCE SET; Schema: SavingMoneyUnina; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"SavingMoneyUnina".portafogli_idportafogli_seq', 1, true);
+SELECT pg_catalog.setval('"SavingMoneyUnina".portafogli_idportafogli_seq', 3, true);
 
 
 --
--- TOC entry 4920 (class 0 OID 0)
--- Dependencies: 220
+-- TOC entry 3677 (class 0 OID 0)
+-- Dependencies: 226
 -- Name: transazione_idtransazione_seq; Type: SEQUENCE SET; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -494,7 +495,7 @@ SELECT pg_catalog.setval('"SavingMoneyUnina".transazione_idtransazione_seq', 1, 
 
 
 --
--- TOC entry 4734 (class 2606 OID 16887)
+-- TOC entry 3496 (class 2606 OID 16457)
 -- Name: persona codicefiscale_pk; Type: CONSTRAINT; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -503,7 +504,7 @@ ALTER TABLE ONLY "SavingMoneyUnina".persona
 
 
 --
--- TOC entry 4736 (class 2606 OID 16894)
+-- TOC entry 3502 (class 2606 OID 16459)
 -- Name: utente email_pk; Type: CONSTRAINT; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -512,7 +513,7 @@ ALTER TABLE ONLY "SavingMoneyUnina".utente
 
 
 --
--- TOC entry 4738 (class 2606 OID 16899)
+-- TOC entry 3494 (class 2606 OID 16461)
 -- Name: contocorrente iban_pk; Type: CONSTRAINT; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -521,7 +522,7 @@ ALTER TABLE ONLY "SavingMoneyUnina".contocorrente
 
 
 --
--- TOC entry 4746 (class 2606 OID 16936)
+-- TOC entry 3492 (class 2606 OID 16463)
 -- Name: categoria nome_pk; Type: CONSTRAINT; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -530,7 +531,7 @@ ALTER TABLE ONLY "SavingMoneyUnina".categoria
 
 
 --
--- TOC entry 4740 (class 2606 OID 17060)
+-- TOC entry 3490 (class 2606 OID 16465)
 -- Name: carta numero_pk; Type: CONSTRAINT; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -539,7 +540,7 @@ ALTER TABLE ONLY "SavingMoneyUnina".carta
 
 
 --
--- TOC entry 4744 (class 2606 OID 16922)
+-- TOC entry 3498 (class 2606 OID 16467)
 -- Name: portafogli portafogli_pk; Type: CONSTRAINT; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -548,7 +549,7 @@ ALTER TABLE ONLY "SavingMoneyUnina".portafogli
 
 
 --
--- TOC entry 4742 (class 2606 OID 16914)
+-- TOC entry 3500 (class 2606 OID 16469)
 -- Name: transazione transazione_pk; Type: CONSTRAINT; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -557,7 +558,7 @@ ALTER TABLE ONLY "SavingMoneyUnina".transazione
 
 
 --
--- TOC entry 4756 (class 2620 OID 17096)
+-- TOC entry 3513 (class 2620 OID 16470)
 -- Name: contocorrente limitespesa_plafond_check; Type: TRIGGER; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -565,7 +566,7 @@ CREATE TRIGGER limitespesa_plafond_check BEFORE UPDATE ON "SavingMoneyUnina".con
 
 
 --
--- TOC entry 4757 (class 2620 OID 17141)
+-- TOC entry 3514 (class 2620 OID 16471)
 -- Name: parolachiave parolechiave_check; Type: TRIGGER; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -573,7 +574,7 @@ CREATE TRIGGER parolechiave_check BEFORE INSERT ON "SavingMoneyUnina".parolachia
 
 
 --
--- TOC entry 4747 (class 2606 OID 17013)
+-- TOC entry 3512 (class 2606 OID 16472)
 -- Name: utente codicefiscale_fk; Type: FK CONSTRAINT; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -582,7 +583,7 @@ ALTER TABLE ONLY "SavingMoneyUnina".utente
 
 
 --
--- TOC entry 4748 (class 2606 OID 17018)
+-- TOC entry 3503 (class 2606 OID 16477)
 -- Name: contocorrente email_fk; Type: FK CONSTRAINT; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -591,7 +592,16 @@ ALTER TABLE ONLY "SavingMoneyUnina".contocorrente
 
 
 --
--- TOC entry 4750 (class 2606 OID 17028)
+-- TOC entry 3506 (class 2606 OID 16517)
+-- Name: portafogli email_fk; Type: FK CONSTRAINT; Schema: SavingMoneyUnina; Owner: postgres
+--
+
+ALTER TABLE ONLY "SavingMoneyUnina".portafogli
+    ADD CONSTRAINT email_fk FOREIGN KEY (email) REFERENCES "SavingMoneyUnina".utente(email);
+
+
+--
+-- TOC entry 3509 (class 2606 OID 16482)
 -- Name: transazione iban_fk; Type: FK CONSTRAINT; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -600,7 +610,7 @@ ALTER TABLE ONLY "SavingMoneyUnina".transazione
 
 
 --
--- TOC entry 4751 (class 2606 OID 17107)
+-- TOC entry 3507 (class 2606 OID 16487)
 -- Name: portafogli_categoria idportafogli_fk; Type: FK CONSTRAINT; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -609,7 +619,7 @@ ALTER TABLE ONLY "SavingMoneyUnina".portafogli_categoria
 
 
 --
--- TOC entry 4753 (class 2606 OID 17120)
+-- TOC entry 3510 (class 2606 OID 16492)
 -- Name: transazione_portafogli idportafogli_fk; Type: FK CONSTRAINT; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -618,7 +628,7 @@ ALTER TABLE ONLY "SavingMoneyUnina".transazione_portafogli
 
 
 --
--- TOC entry 4755 (class 2606 OID 17135)
+-- TOC entry 3505 (class 2606 OID 16497)
 -- Name: parolachiave idportafogli_fk; Type: FK CONSTRAINT; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -627,7 +637,7 @@ ALTER TABLE ONLY "SavingMoneyUnina".parolachiave
 
 
 --
--- TOC entry 4754 (class 2606 OID 17125)
+-- TOC entry 3511 (class 2606 OID 16502)
 -- Name: transazione_portafogli idtransazione_fk; Type: FK CONSTRAINT; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -636,7 +646,7 @@ ALTER TABLE ONLY "SavingMoneyUnina".transazione_portafogli
 
 
 --
--- TOC entry 4752 (class 2606 OID 17112)
+-- TOC entry 3508 (class 2606 OID 16507)
 -- Name: portafogli_categoria nomecategoria_fk; Type: FK CONSTRAINT; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -645,7 +655,7 @@ ALTER TABLE ONLY "SavingMoneyUnina".portafogli_categoria
 
 
 --
--- TOC entry 4749 (class 2606 OID 17073)
+-- TOC entry 3504 (class 2606 OID 16512)
 -- Name: contocorrente numerocarta_fk; Type: FK CONSTRAINT; Schema: SavingMoneyUnina; Owner: postgres
 --
 
@@ -653,7 +663,7 @@ ALTER TABLE ONLY "SavingMoneyUnina".contocorrente
     ADD CONSTRAINT numerocarta_fk FOREIGN KEY (numerocarta) REFERENCES "SavingMoneyUnina".carta(numero);
 
 
--- Completed on 2024-01-26 15:57:18
+-- Completed on 2024-01-29 13:54:42 CET
 
 --
 -- PostgreSQL database dump complete

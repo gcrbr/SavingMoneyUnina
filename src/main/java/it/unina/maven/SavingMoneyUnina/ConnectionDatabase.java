@@ -15,14 +15,17 @@ public class ConnectionDatabase {
 	private void inizializzaConnessione() {
 		String url = "jdbc:postgresql://localhost:5432/postgres";
 		try {
-			this.con = DriverManager.getConnection(url,"postgres","120499");
+			this.con = DriverManager.getConnection(url,"postgres","diocane");
+			this.con.prepareStatement("SET search_path = \"SavingMoneyUnina\"").execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
+	
 	public Connection getConnection() {
 		return this.con;
 	}
+	
 	public static ConnectionDatabase getInstance() {
 		if(istanza == null) {
 			istanza = new ConnectionDatabase();

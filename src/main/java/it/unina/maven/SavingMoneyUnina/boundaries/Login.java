@@ -1,11 +1,11 @@
-package it.unina.maven.SavingMoneyUnina;
+package it.unina.maven.SavingMoneyUnina.boundaries;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.Arrays;
+import java.sql.SQLException;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -20,9 +20,11 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import it.unina.maven.SavingMoneyUnina.boundaries.Login;
+import it.unina.maven.SavingMoneyUnina.ConnectionDatabase;
+import it.unina.maven.SavingMoneyUnina.control.Controller;
+import it.unina.maven.SavingMoneyUnina.entities.Utente;
 
-public class Main extends JFrame {
+public class Login extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -31,15 +33,18 @@ public class Main extends JFrame {
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
 
+	ConnectionDatabase c = new ConnectionDatabase();
+	Controller controller = new Controller();
+	
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		ConnectionDatabase c = new ConnectionDatabase();
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Main frame = new Main();
+					Login frame = new Login();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,7 +56,7 @@ public class Main extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Main() {
+	public Login() {
 		setResizable(false);
 		setTitle("SavingMoneyUnina");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -69,17 +74,24 @@ public class Main extends JFrame {
 		Accedi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {		
 				if(!email.getText().equals("") && password.getPassword().length != 0){
-					Login p = new Login();
-					if(email.getText().equals("salvatore") && Arrays.equals("1234".toCharArray(), password.getPassword())){
-						setVisible(false);
-						p.setVisible(true);
+					Utente utenteLoggato;
+					try {
+						utenteLoggato = controller.checkLoginCredentials(email.getText(), password.getText());
+						if(utenteLoggato != null){
+							Home p = new Home(utenteLoggato);
+							setVisible(false);
+							p.setVisible(true);
+						}
+						else {
+							JOptionPane.showMessageDialog(null, "Credenziali errate");
+						}
+					} catch (SQLException e1) {
+						JOptionPane.showMessageDialog(null, "Si è verificato un errore: " + e1.getLocalizedMessage());
 					}
-					else {
-						JOptionPane.showMessageDialog(null, "Email e Password sbagliati");
-					}
+					
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "Email e Password vuoti");
+					JOptionPane.showMessageDialog(null, "I campi email e password sono vuoti");
 				}
 				
 			}

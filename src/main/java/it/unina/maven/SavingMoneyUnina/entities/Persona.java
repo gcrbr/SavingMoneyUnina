@@ -3,18 +3,11 @@ package it.unina.maven.SavingMoneyUnina.entities;
 public class Persona {
 	private String nome;
 	private String cognome;
+	private String paese;
 	private String indirizzo;
 	private String città;
 	private String codicefiscale;
 	private Utente utente;
-
-	public Persona(String nome, String cognome, String indirizzo, String città, String codicefiscale) {
-		this.nome=nome;
-		this.cognome=cognome;
-		this.indirizzo=indirizzo;
-		this.città=città;
-		this.codicefiscale=codicefiscale;
-	}
 
 	public String getNome() {
 		return nome;
@@ -31,7 +24,15 @@ public class Persona {
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
-
+	
+	public String getPaese() {
+		return paese;
+	}
+	
+	public void setPaese(String paese) {
+		this.paese = paese;
+	}
+	
 	public String getIndirizzo() {
 		return indirizzo;
 	}
@@ -62,6 +63,10 @@ public class Persona {
 
 	public void setUtente(Utente utente) {
 		this.utente = utente;
+	}
+	
+	public String getNomeIntero() {
+		return this.getNome() + " " + this.getCognome();
 	}
 
 }

@@ -3,6 +3,7 @@ package it.unina.maven.SavingMoneyUnina.entities;
 public class Portafogli {
 	private int idportafogli;
 	private String nome;
+	private Utente utente;
 	
 	public int getIdportafogli() {
 		return idportafogli;
@@ -18,5 +19,13 @@ public class Portafogli {
 	
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public Utente getUtente() {
+		return utente;
+	}
+
+	public void setUtente(Utente utente) {
+		this.utente = utente;
 	}
 }
