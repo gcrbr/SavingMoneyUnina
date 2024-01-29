@@ -1,68 +1,132 @@
-package it.unina.maven.SavingMoneyUnina.boundaries;
-
+package it.unina.maven.SavingMoneyUnina;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.Arrays;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
-public class Login extends JFrame {
+import it.unina.maven.SavingMoneyUnina.boundaries.Login;
+
+public class Main extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField numeroCarta;
+	private JTextField email;
+	private JPasswordField password;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_2;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		ConnectionDatabase c = new ConnectionDatabase();
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Main frame = new Main();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.
 	 */
-	public Login() {
-		setTitle("Pagina Principale");
+	public Main() {
+		setResizable(false);
+		setTitle("SavingMoneyUnina");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 650, 349);
+		setBounds(100, 100, 590, 308);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(28, 21, 41));
 		contentPane.setForeground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
-		JLabel JLabel = new JLabel("NUMERO CARTA");
-		JLabel.setForeground(new Color(172, 163, 175));
-		JLabel.setFont(new Font("Helvetica", Font.PLAIN, 13));
-		JLabel.setBounds(188, 69, 258, 20);
-		contentPane.add(JLabel);
-		
-		JButton bottoneAggiungi = new JButton("AGGIUNGI");
-		bottoneAggiungi.setFont(new Font("Dialog", Font.PLAIN, 14));
-		bottoneAggiungi.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(numeroCarta.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Il numero carta è vuoto!");
+		JButton Accedi = new JButton("ACCEDI");
+		Accedi.setFont(new Font("Helvetica", Font.PLAIN, 14));
+		Accedi.setBounds(291, 192, 258, 30);
+		Accedi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {		
+				if(!email.getText().equals("") && password.getPassword().length != 0){
+					Login p = new Login();
+					if(email.getText().equals("salvatore") && Arrays.equals("1234".toCharArray(), password.getPassword())){
+						setVisible(false);
+						p.setVisible(true);
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Email e Password sbagliati");
+					}
 				}
+				else {
+					JOptionPane.showMessageDialog(null, "Email e Password vuoti");
+				}
+				
 			}
 		});
-		bottoneAggiungi.setBackground(new Color(53, 45, 72));
-		bottoneAggiungi.setForeground(new Color(255, 255, 255));
-		bottoneAggiungi.setOpaque(true);
-		bottoneAggiungi.setBorderPainted(false);
-		bottoneAggiungi.setBounds(189, 153, 257, 27);
-		contentPane.add(bottoneAggiungi);
+		contentPane.setLayout(null);
+		Accedi.setBackground(new Color(53, 45, 72));
+		Accedi.setForeground(new Color(255, 255, 255));
+		Accedi.setOpaque(true);
+		Accedi.setBorderPainted(false);
 		
-		numeroCarta = new JTextField();
-		numeroCarta.setFont(new Font("Helvetica", Font.PLAIN, 13));
-		numeroCarta.setBackground(new Color(255, 255, 255));
-		numeroCarta.setBounds(187, 99, 258, 27);
-		contentPane.add(numeroCarta);
-		numeroCarta.setColumns(10);
+		email = new JTextField();
+		email.setFont(new Font("Helvetica", Font.PLAIN, 13));
+		email.setBackground(new Color(255, 255, 255));
+		email.setBounds(291, 68, 258, 27);
+		contentPane.add(email);
+		email.setColumns(10);
+		email.setBorder(new CompoundBorder(new LineBorder(new Color(172, 163, 175)), new EmptyBorder(5, 5, 5, 5)));
+		
+		password = new JPasswordField();
+		password.setFont(new Font("Helvetica", Font.PLAIN, 13));
+		password.setBackground(new Color(255, 255, 255));
+		password.setBounds(291, 140, 258, 27);
+		contentPane.add(password);
+		contentPane.add(Accedi);
+		password.setColumns(10);
+		password.setBorder(new CompoundBorder(new LineBorder(new Color(172, 163, 175)), new EmptyBorder(5, 5, 5, 5)));
+
+		
+		lblNewLabel_1 = new JLabel("EMAIL");
+		lblNewLabel_1.setForeground(new Color(172, 163, 175));
+		lblNewLabel_1.setFont(new Font("Helvetica", Font.PLAIN, 13));
+		lblNewLabel_1.setBounds(291, 50, 61, 16);
+		contentPane.add(lblNewLabel_1);
+		
+		lblNewLabel_2 = new JLabel("PASSWORD");
+		lblNewLabel_2.setForeground(new Color(172, 163, 175));
+		lblNewLabel_2.setFont(new Font("Helvetica", Font.PLAIN, 13));
+		lblNewLabel_2.setBounds(291, 121, 76, 16);
+		contentPane.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel = new JLabel("");
+		try {
+			lblNewLabel.setIcon(new ImageIcon(ImageIO.read(this.getClass().getResourceAsStream("/logo.png"))));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		lblNewLabel.setBounds(44, 42, 206, 191);
+		contentPane.add(lblNewLabel);
 	}
 }
