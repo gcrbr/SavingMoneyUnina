@@ -1,6 +1,6 @@
 package it.unina.maven.SavingMoneyUnina.entities;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Transazione {
 	private int idtransazione;

@@ -81,5 +81,21 @@ public class Utente {
 	public void addContoCorrente(ContoCorrente cc) {
 		contigestiti.add(cc);
 	}
-
+	
+	public double getSaldoTotaleConti() {
+		try {
+			return new UtenteDao().getSaldoTotaleConti(this);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
+	public void creaNuovoConto(ContoCorrente cc, Carta c) throws SQLException {
+		new UtenteDao().inserisciNuovoConto(this, cc, c);
+	}
+	
+	public void refreshContiGestiti() {
+		this.getContigestiti().clear();
+	}
 }

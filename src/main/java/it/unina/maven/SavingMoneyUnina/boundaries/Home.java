@@ -1,7 +1,12 @@
 package it.unina.maven.SavingMoneyUnina.boundaries;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
@@ -22,14 +27,13 @@ public class Home extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private Utente utente;
+	private Controller controller = new Controller();
 
-	public Home(Utente utente) {
-		this.utente = utente;
-		
+	public Home(final Utente utente) {
+		setResizable(false);
 		setTitle("Pagina Principale");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 675, 557);
+		setBounds(100, 100, 693, 557);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(28, 21, 41));
 		contentPane.setForeground(new Color(0, 0, 0));
@@ -46,7 +50,7 @@ public class Home extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(35, 21, 40));
-		panel.setBounds(17, 49, 210, 108);
+		panel.setBounds(17, 49, 210, 115);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
@@ -56,14 +60,14 @@ public class Home extends JFrame {
 		lblNewLabel_1.setFont(new Font("Helvetica", Font.PLAIN, 13));
 		panel.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel = new JLabel("0,00 €");
-		lblNewLabel.setBounds(18, 34, 105, 46);
+		JLabel lblNewLabel = new JLabel(controller.formatMoney(utente.getSaldoTotaleConti()));
+		lblNewLabel.setBounds(18, 34, 181, 46);
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Helvetica", Font.BOLD, 20));
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		
 		JButton btnVediReportMensile = new JButton("Vedi report mensile");
-		btnVediReportMensile.setBounds(6, 74, 193, 28);
+		btnVediReportMensile.setBounds(6, 81, 193, 28);
 		panel.add(btnVediReportMensile);
 		btnVediReportMensile.setOpaque(true);
 		btnVediReportMensile.setForeground(Color.WHITE);
@@ -83,18 +87,26 @@ public class Home extends JFrame {
 		lblNewLabel_1_1.setFont(new Font("Helvetica", Font.PLAIN, 13));
 		panel_1.add(lblNewLabel_1_1);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane.setBounds(6, 48, 198, 365);
-		scrollPane.setBorder(BorderFactory.createEmptyBorder());
-		panel_1.add(scrollPane);
+		ArrayList<ContoCorrente> cs = utente.getContigestiti();
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(35, 21, 40));
-		scrollPane.setViewportView(panel_2);
 		panel_2.setLayout(null);
+		panel_2.setPreferredSize(new Dimension(500, 53*cs.size()));
+		
+		JScrollPane scrollPane = new JScrollPane(panel_2);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setBounds(6, 48, 198, 365);
+		scrollPane.setBorder(BorderFactory.createEmptyBorder());
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
+		panel_1.add(scrollPane);
 		
 		JButton btnAggiungiConto = new JButton("+ Aggiungi conto");
+		btnAggiungiConto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.showNuovoConto(Home.this, utente);
+			}
+		});
 		btnAggiungiConto.setOpaque(true);
 		btnAggiungiConto.setForeground(Color.WHITE);
 		btnAggiungiConto.setFont(new Font("Helvetica", Font.PLAIN, 14));
@@ -114,17 +126,20 @@ public class Home extends JFrame {
 		panel_4.add(lblNewLabel_1_3);
 		lblNewLabel_1_3.setForeground(Color.WHITE);
 		lblNewLabel_1_3.setFont(new Font("Helvetica", Font.PLAIN, 13));
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane_1.setBounds(6, 48, 198, 365);
-		scrollPane_1.setBorder(BorderFactory.createEmptyBorder());
-		panel_4.add(scrollPane_1);
-		
+
+		ArrayList<Portafogli> ps = utente.getPortafogli();
+
 		JPanel panel_2_1 = new JPanel();
 		panel_2_1.setLayout(null);
 		panel_2_1.setBackground(new Color(35, 21, 40));
-		scrollPane_1.setViewportView(panel_2_1);
+		panel_2_1.setPreferredSize(new Dimension(500, 53*ps.size()));
+		
+		JScrollPane scrollPane_1 = new JScrollPane(panel_2_1);
+		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane_1.setBounds(6, 48, 198, 365);
+		scrollPane_1.setBorder(BorderFactory.createEmptyBorder());
+		scrollPane_1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
+		panel_4.add(scrollPane_1);
 		
 		JButton Accedi = new JButton("+ Crea portafogli");
 		Accedi.setOpaque(true);
@@ -135,12 +150,11 @@ public class Home extends JFrame {
 		Accedi.setBounds(9, 421, 193, 28);
 		panel_4.add(Accedi);
 		
-		ArrayList<Portafogli> ps = utente.getPortafogli();
 		for(int i=0; i<ps.size(); ++i) {
 			JPanel panel_3_1 = new JPanel();
 			panel_3_1.setLayout(null);
 			panel_3_1.setBackground(new Color(53, 45, 72));
-			panel_3_1.setBounds(2, 6+43*i, 192, 43);
+			panel_3_1.setBounds(2, 6+53*i, 192, 43);
 			panel_2_1.add(panel_3_1);
 			
 			JLabel lblNewLabel_1_2_3 = new JLabel(ps.get(i).getNome());
@@ -151,34 +165,38 @@ public class Home extends JFrame {
 			panel_3_1.add(lblNewLabel_1_2_3);
 		}
 		
-		ArrayList<ContoCorrente> cs = utente.getContigestiti();
 		for(int i=0; i<cs.size(); ++i) {
 			JPanel panel_3 = new JPanel();
 			panel_3.setBackground(new Color(53, 45, 72));
-			panel_3.setBounds(2, 6+43*i, 19, 43);
+			panel_3.setBounds(2, 6+53*i, 192, 43);
 			panel_2.add(panel_3);
 			panel_3.setLayout(null);
 			
-			JLabel lblNewLabel_1_2 = new JLabel(cs.get(i).getIban());
+			final ContoCorrente cx = cs.get(i);
+			
+			MouseAdapter info = new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					controller.showInformazioniConto(Home.this, cx);
+				}
+			};
+			
+			panel_3.addMouseListener(info);
+			
+			JLabel lblNewLabel_1_2 = new JLabel(cx.getIban());
 			lblNewLabel_1_2.setBounds(6, 6, 131, 13);
 			lblNewLabel_1_2.setBackground(new Color(255, 255, 255));
 			lblNewLabel_1_2.setForeground(new Color(255, 255, 255));
 			lblNewLabel_1_2.setFont(new Font("Helvetica", Font.PLAIN, 13));
 			panel_3.add(lblNewLabel_1_2);
+			lblNewLabel_1_2.addMouseListener(info);
 			
-			JLabel lblNewLabel_1_2_1 = new JLabel("Carta " + cs.get(i).getCarta().getNumero());
+			JLabel lblNewLabel_1_2_1 = new JLabel("Carta " + cx.getCarta().getNumero());
 			lblNewLabel_1_2_1.setForeground(new Color(255, 255, 255));
 			lblNewLabel_1_2_1.setFont(new Font("Helvetica", Font.PLAIN, 13));
 			lblNewLabel_1_2_1.setBackground(Color.WHITE);
 			lblNewLabel_1_2_1.setBounds(6, 24, 131, 13);
 			panel_3.add(lblNewLabel_1_2_1);
-			
-			JLabel lblNewLabel_1_2_2 = new JLabel(new Controller().formatMoney(cs.get(i).getSaldo()));
-			lblNewLabel_1_2_2.setForeground(new Color(255, 255, 255));
-			lblNewLabel_1_2_2.setFont(new Font("Helvetica", Font.PLAIN, 14));
-			lblNewLabel_1_2_2.setBackground(Color.WHITE);
-			lblNewLabel_1_2_2.setBounds(95, 6, 100, 13);
-			panel_3.add(lblNewLabel_1_2_2);
+			lblNewLabel_1_2_1.addMouseListener(info);
 		}
 	}
 }

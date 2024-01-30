@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import it.unina.maven.SavingMoneyUnina.ConnectionDatabase;
+import it.unina.maven.SavingMoneyUnina.entities.Carta;
 import it.unina.maven.SavingMoneyUnina.entities.ContoCorrente;
 import it.unina.maven.SavingMoneyUnina.entities.Persona;
 import it.unina.maven.SavingMoneyUnina.entities.Portafogli;
@@ -19,7 +20,7 @@ public class UtenteDao {
 	public ArrayList<ContoCorrente> getContiGestiti(Utente utente) throws SQLException {
 		database = ConnectionDatabase.getInstance();
 		connection = database.getConnection();
-		PreparedStatement stm = connection.prepareStatement("SELECT * FROM ContoCorrente WHERE email = ?");
+		PreparedStatement stm = connection.prepareStatement("SELECT * FROM ContoCorrente WHERE email = ? ORDER BY iban");
 		stm.setString(1, utente.getEmail());
 		ResultSet rs = stm.executeQuery();
 		ArrayList<ContoCorrente> conti = new ArrayList<>();
@@ -27,6 +28,8 @@ public class UtenteDao {
 			ContoCorrente c = new ContoCorrente();
 			c.setSaldo(rs.getDouble(1));
 			c.setIban(rs.getString(2));
+			c.setUtente(utente);
+			
 			conti.add(c);
 		}
 		return conti;
@@ -50,7 +53,8 @@ public class UtenteDao {
 	public Persona getPersona(Utente utente) throws SQLException {
 		database = ConnectionDatabase.getInstance();
 		connection = database.getConnection();
-		PreparedStatement stm = connection.prepareStatement("SELECT nome,cognome,indirizzo,paese,codicefiscale,città FROM persona NATURAL JOIN utente");
+		PreparedStatement stm = connection.prepareStatement("SELECT nome,cognome,indirizzo,paese,codicefiscale,città FROM persona NATURAL JOIN utente WHERE email = ?");
+		stm.setString(1, utente.getEmail());
 		ResultSet rs = stm.executeQuery();
 		Persona persona = new Persona();
 		while(rs.next()) {
@@ -79,5 +83,38 @@ public class UtenteDao {
 			portafogli.add(p);
 		}
 		return portafogli;
+		
 	}
+	
+	public double getSaldoTotaleConti(Utente utente) throws SQLException {
+		database = ConnectionDatabase.getInstance();
+		connection = database.getConnection();
+		PreparedStatement stm = connection.prepareStatement("SELECT calcola_saldo_totale(?)");
+		stm.setString(1, utente.getEmail());
+		ResultSet rs = stm.executeQuery();
+		while(rs.next()) {
+			return rs.getDouble(1);
+		}
+		return 0;
+	}
+	
+	public void inserisciNuovoConto(Utente u, ContoCorrente cc, Carta c) throws SQLException {
+		database = ConnectionDatabase.getInstance();
+		connection = database.getConnection();
+		PreparedStatement stm = connection.prepareStatement("CALL crea_nuovo_conto(?, ?, ?, ?, ?, ?, ?, ?)");
+		stm.setString(1, cc.getIban());
+		stm.setDouble(2, cc.getSaldo());
+		stm.setString(3, c.getNumero());
+		stm.setDate(4, c.getScadenza());
+		stm.setString(5, c.getCvv());
+		stm.setString(6, c.getTipo());
+		if(c.getTipo().equals("credito")) {
+			stm.setDouble(7, c.getPlafond());
+		}else {
+			stm.setDouble(7, c.getLimitespesa());
+		}
+		stm.setString(8, u.getEmail());
+		stm.execute();
+	}
+	
 }

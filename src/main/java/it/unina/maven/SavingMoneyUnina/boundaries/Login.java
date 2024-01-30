@@ -68,7 +68,7 @@ public class Login extends JFrame {
 
 		setContentPane(contentPane);
 		
-		JButton Accedi = new JButton("ACCEDI");
+		JButton Accedi = new JButton("Accedi");
 		Accedi.setFont(new Font("Helvetica", Font.PLAIN, 14));
 		Accedi.setBounds(291, 192, 258, 30);
 		Accedi.addActionListener(new ActionListener() {
@@ -78,9 +78,8 @@ public class Login extends JFrame {
 					try {
 						utenteLoggato = controller.checkLoginCredentials(email.getText(), password.getText());
 						if(utenteLoggato != null){
-							Home p = new Home(utenteLoggato);
 							setVisible(false);
-							p.setVisible(true);
+							controller.showHomePage(utenteLoggato);
 						}
 						else {
 							JOptionPane.showMessageDialog(null, "Credenziali errate");
