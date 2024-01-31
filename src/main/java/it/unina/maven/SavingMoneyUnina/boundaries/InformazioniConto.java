@@ -22,7 +22,6 @@ import it.unina.maven.SavingMoneyUnina.entities.Transazione;
 
 public class InformazioniConto extends JFrame {
 	private Controller controller = new Controller();
-	
 	public InformazioniConto(final JFrame caller, final ContoCorrente cc) {
 		setResizable(false);
 		Carta c = cc.getCarta();
@@ -142,11 +141,10 @@ public class InformazioniConto extends JFrame {
 		
 		JScrollPane scrollPane_1 = new JScrollPane(panel_2_1);
 		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrollPane_1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
+		scrollPane_1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);  
 		scrollPane_1.setBorder(BorderFactory.createEmptyBorder());
 		scrollPane_1.setBounds(6, 48, 198, 365);
 		panel_4.add(scrollPane_1);
-		
 		
 		for(int i=0; i<listaTransazioni.size(); ++i) {
 			Transazione t = listaTransazioni.get(i);

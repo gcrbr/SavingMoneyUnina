@@ -7,9 +7,12 @@ import javax.swing.JFrame;
 
 import it.unina.maven.SavingMoneyUnina.boundaries.Home;
 import it.unina.maven.SavingMoneyUnina.boundaries.InformazioniConto;
+import it.unina.maven.SavingMoneyUnina.boundaries.InformazioniPortafogli;
 import it.unina.maven.SavingMoneyUnina.boundaries.NuovaTransazione;
 import it.unina.maven.SavingMoneyUnina.boundaries.NuovoConto;
+import it.unina.maven.SavingMoneyUnina.boundaries.SceltaManualeTransazione;
 import it.unina.maven.SavingMoneyUnina.entities.ContoCorrente;
+import it.unina.maven.SavingMoneyUnina.entities.Portafogli;
 import it.unina.maven.SavingMoneyUnina.entities.Utente;
 import it.unina.maven.SavingMoneyUnina.entities.dao.UtenteDao;
 
@@ -51,5 +54,15 @@ public class Controller {
 	
 	public void reloadFrame(JFrame frame) {
 		frame.repaint();
+	}
+	
+	public void showInformazioniPortafogli(Utente u, Portafogli p) {
+		InformazioniPortafogli ip = new InformazioniPortafogli(u, p);
+		ip.setVisible(true);
+	}
+	
+	public void showSceltaManuale(Utente u, Portafogli p) {
+		SceltaManualeTransazione smt = new SceltaManualeTransazione(u, p);
+		smt.setVisible(true);
 	}
 }

@@ -160,8 +160,6 @@ public class NuovaTransazione extends JFrame {
 					cc.addTransazione(t);
 					cc.refreshTransazioni();
 					
-					controller.reloadFrame(caller);
-					
 					JOptionPane.showMessageDialog(null, "Transazione aggiunta con successo.");
 					setVisible(false);
 				}catch(SQLException e1) {

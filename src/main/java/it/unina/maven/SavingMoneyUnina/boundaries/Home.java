@@ -98,7 +98,7 @@ public class Home extends JFrame {
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(6, 48, 198, 365);
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
-		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);  
 		panel_1.add(scrollPane);
 		
 		JButton btnAggiungiConto = new JButton("+ Aggiungi conto");
@@ -138,7 +138,7 @@ public class Home extends JFrame {
 		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane_1.setBounds(6, 48, 198, 365);
 		scrollPane_1.setBorder(BorderFactory.createEmptyBorder());
-		scrollPane_1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
+		scrollPane_1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);  
 		panel_4.add(scrollPane_1);
 		
 		JButton Accedi = new JButton("+ Crea portafogli");
@@ -151,18 +151,28 @@ public class Home extends JFrame {
 		panel_4.add(Accedi);
 		
 		for(int i=0; i<ps.size(); ++i) {
+			final Portafogli px = ps.get(i);
+			
+			MouseAdapter info2 = new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+					controller.showInformazioniPortafogli(utente, px);
+				}
+			};
+			
 			JPanel panel_3_1 = new JPanel();
 			panel_3_1.setLayout(null);
 			panel_3_1.setBackground(new Color(53, 45, 72));
 			panel_3_1.setBounds(2, 6+53*i, 192, 43);
 			panel_2_1.add(panel_3_1);
+			panel_3_1.addMouseListener(info2);
 			
-			JLabel lblNewLabel_1_2_3 = new JLabel(ps.get(i).getNome());
+			JLabel lblNewLabel_1_2_3 = new JLabel(px.getNome());
 			lblNewLabel_1_2_3.setForeground(Color.WHITE);
 			lblNewLabel_1_2_3.setFont(new Font("Helvetica", Font.PLAIN, 13));
 			lblNewLabel_1_2_3.setBackground(Color.WHITE);
 			lblNewLabel_1_2_3.setBounds(6, 6, 131, 13);
 			panel_3_1.add(lblNewLabel_1_2_3);
+			lblNewLabel_1_2_3.addMouseListener(info2);
 		}
 		
 		for(int i=0; i<cs.size(); ++i) {

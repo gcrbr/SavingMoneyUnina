@@ -15,12 +15,12 @@ public class PortafogliDao {
 	private ConnectionDatabase database;
 	private Connection connection;
 	
-	public List<Transazione> getTransazioni(Portafogli portafogli) throws SQLException {
+	public ArrayList<Transazione> getTransazioni(Portafogli portafogli) throws SQLException {
 		database = ConnectionDatabase.getInstance();
 		connection = database.getConnection();
 		PreparedStatement stm = connection.prepareStatement("SELECT * FROM transazione_portafogli NATURAL JOIN transazione WHERE idportafogli=?");
 		stm.setInt(1, portafogli.getIdportafogli());
-		List<Transazione> transazioni = new ArrayList<>();
+		ArrayList<Transazione> transazioni = new ArrayList<>();
 		ResultSet rs = stm.executeQuery();
 		while(rs.next()) {
 			Transazione t = new Transazione();
@@ -35,16 +35,29 @@ public class PortafogliDao {
 		return transazioni;
 	}
 	
-	public List<String> getParoleChiave(Portafogli portafogli) throws SQLException {
+	public ArrayList<String> getParoleChiave(Portafogli portafogli) throws SQLException {
 		database = ConnectionDatabase.getInstance();
 		connection = database.getConnection();
 		PreparedStatement stm = connection.prepareStatement("SELECT parola FROM ParolaChiave WHERE idportafogli=?");
 		stm.setInt(1, portafogli.getIdportafogli());
-		List<String> parolechiave = new ArrayList<>();
+		ArrayList<String> parolechiave = new ArrayList<>();
 		ResultSet rs = stm.executeQuery();
 		while(rs.next()) {
 			parolechiave.add(rs.getString(1));
 		}
 		return parolechiave;
 	}
+	
+	public String getParoleChiaveString(Portafogli portafogli) throws SQLException {
+		database = ConnectionDatabase.getInstance();
+		connection = database.getConnection();
+		PreparedStatement stm = connection.prepareStatement("SELECT get_parolechiave_string(?)");
+		stm.setInt(1, portafogli.getIdportafogli());
+		ResultSet rs = stm.executeQuery();
+		while(rs.next()) {
+			return rs.getString(1);
+		}
+		return "";
+	}
+	
 }
