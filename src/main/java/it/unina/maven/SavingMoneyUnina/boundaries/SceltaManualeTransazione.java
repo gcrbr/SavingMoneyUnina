@@ -1,87 +1,123 @@
 package it.unina.maven.SavingMoneyUnina.boundaries;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 import it.unina.maven.SavingMoneyUnina.control.Controller;
 import it.unina.maven.SavingMoneyUnina.entities.ContoCorrente;
 import it.unina.maven.SavingMoneyUnina.entities.Portafogli;
 import it.unina.maven.SavingMoneyUnina.entities.Transazione;
 import it.unina.maven.SavingMoneyUnina.entities.Utente;
-import javax.swing.ScrollPaneConstants;
 
 public class SceltaManualeTransazione extends JFrame {
-	private final JPanel panel = new JPanel();
 	private Controller controller = new Controller();
 	
 	public SceltaManualeTransazione(final Utente u, final Portafogli p) {
 		setResizable(false);
 		setTitle("Scegli una transazione da aggiungere");
 		getContentPane().setBackground(new Color(28, 21, 40));
+		
+		JPanel panel = new JPanel();
 		panel.setBackground(new Color(28, 21, 40));
 		setBounds(100, 100, 338, 443);
 		
 		JScrollPane scrollPane = new JScrollPane(panel);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setBorder(BorderFactory.createEmptyBorder());
 		panel.setLayout(null);
 		
+		ArrayList<ContoCorrente> conti = u.getContigestiti();
 		
-		ArrayList<ContoCorrente> elencoConti = u.getContigestiti();
+		int h = 0;
+		for(ContoCorrente c : conti) {
+			h += 20 + (53+15)*c.getTransazioni().size();
+		}
 		
-		panel.setPreferredSize(new Dimension(500, 1000));
+		panel.setPreferredSize(new Dimension(500, h));
 		
-		for(int i=0;i<elencoConti.size();++i) {
-			ContoCorrente conto = elencoConti.get(i);	
+		int startH = 0;
+		for(int i=0;i<conti.size();++i) {
+			ContoCorrente c = conti.get(i);
+			ArrayList<Transazione> transazioni = c.getTransazioni();
 			
-			JPanel panel_1 = new JPanel();
-			panel_1.setBackground(new Color(0,0,0));
-			panel_1.setBounds(0, 43, 338, 43);
-			panel.add(panel_1);
-			panel_1.setLayout(null);
+			if(i>0) {
+				startH += 6 + 12 + (53+15)*conti.get(i-1).getTransazioni().size();
+			}
 			
-			JLabel lblNewLabel_1_3 = new JLabel(conto.getIban());
-			lblNewLabel_1_3.setBounds(17, 13+10+(conto.getTransazioni().size()*31), 237, 21);
-			lblNewLabel_1_3.setForeground(Color.WHITE);
-			lblNewLabel_1_3.setFont(new Font("Helvetica", Font.BOLD, 14));
-			panel_1.add(lblNewLabel_1_3);
+			JPanel bloccoConto = new JPanel();
+			bloccoConto.setBackground(new Color(35, 21, 40));
+			bloccoConto.setBounds(6, (i==0) ? 6 : startH, 326, 10+(53+15)*transazioni.size());
+			panel.add(bloccoConto);
+			bloccoConto.setLayout(null);
 			
-
+			JLabel lblNewLabel_1 = new JLabel("Conto " + c.getIban());
+			lblNewLabel_1.setForeground(Color.WHITE);
+			lblNewLabel_1.setFont(new Font("Helvetica", Font.BOLD, 14));
+			lblNewLabel_1.setBounds(6, 6, 304, 25);
+			bloccoConto.add(lblNewLabel_1);
 			
-			/*for(int j=0;j<conto.getTransazioni().size();++j) {
-				Transazione transazione = conto.getTransazioni().get(j);
+			for(int j=0;j<transazioni.size();++j) {
+				final Transazione t = transazioni.get(j);
 				
-				JLabel lblNewLabel_1_3_1 = new JLabel((transazione.getTipo().equals("entrata") ? "+" : "-") + " " + controller.formatMoney(transazione.getValore()));
-				lblNewLabel_1_3_1.setForeground(Color.WHITE);
-				lblNewLabel_1_3_1.setFont(new Font("Helvetica", Font.PLAIN, 14));
-				lblNewLabel_1_3_1.setBounds(11, 5+31*j, 68, 21);
-				panel_1_1.add(lblNewLabel_1_3_1);
+				JPanel bloccoTransazione = new JPanel();
+				bloccoTransazione.setBackground(new Color(28, 21, 40));
+				bloccoTransazione.setBounds(6, 37+63*j, 314, 53);
+				bloccoConto.add(bloccoTransazione);
+				bloccoTransazione.setLayout(null);
 				
-				JLabel lblNewLabel_1_3_1_1 = new JLabel(transazione.getDescrizione());
-				lblNewLabel_1_3_1_1.setForeground(Color.WHITE);
-				lblNewLabel_1_3_1_1.setFont(new Font("Helvetica", Font.PLAIN, 13));
-				lblNewLabel_1_3_1_1.setBounds(11, 24, 243, 21);
-				panel_1_1.add(lblNewLabel_1_3_1_1);
+				JLabel lblNewLabel_1_1 = new JLabel((t.getTipo().equals("entrata") ? "+" : "-") + " " + controller.formatMoney(t.getValore()));
+				lblNewLabel_1_1.setForeground(Color.WHITE);
+				lblNewLabel_1_1.setFont(new Font("Helvetica", Font.BOLD, 13));
+				lblNewLabel_1_1.setBounds(16, 6, 300, 25);
+				bloccoTransazione.add(lblNewLabel_1_1);
+				
+				JLabel lblNewLabel_1_1_1 = new JLabel(t.getDescrizione());
+				lblNewLabel_1_1_1.setForeground(Color.WHITE);
+				lblNewLabel_1_1_1.setFont(new Font("Helvetica", Font.PLAIN, 13));
+				lblNewLabel_1_1_1.setBounds(16, 22, 292, 25);
+				bloccoTransazione.add(lblNewLabel_1_1_1);
 				
 				JButton btnInserisciTransazione = new JButton("+");
 				btnInserisciTransazione.setOpaque(true);
 				btnInserisciTransazione.setForeground(Color.WHITE);
-				btnInserisciTransazione.setFont(new Font("Helvetica", Font.PLAIN, 14));
+				btnInserisciTransazione.setFont(new Font("Helvetica", Font.BOLD, 20));
 				btnInserisciTransazione.setBorderPainted(false);
 				btnInserisciTransazione.setBackground(new Color(53, 45, 72));
-				btnInserisciTransazione.setBounds(237, 5, 59, 40);
-				panel_1_1.add(btnInserisciTransazione);
-				getContentPane().add(scrollPane, BorderLayout.CENTER);
-			}*/
+				btnInserisciTransazione.setBounds(242, 6, 66, 42);
+				bloccoTransazione.add(btnInserisciTransazione);
+				
+				btnInserisciTransazione.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						try {
+							p.addTransazione(t);
+							JOptionPane.showMessageDialog(null, "Transazione aggiunta con successo");
+						}catch(SQLException e1) {
+							JOptionPane.showMessageDialog(null, "Si è verificato un errore interno: " + e1.getLocalizedMessage());
+						}catch(Exception e2) {
+							JOptionPane.showMessageDialog(null, "Si è verificato un errore: " + e2.getLocalizedMessage());
+						}
+					}
+				});
+			}
 		}
+		
+		getContentPane().add(scrollPane);
+		
 	}
 }

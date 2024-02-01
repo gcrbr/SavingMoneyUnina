@@ -16,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 import it.unina.maven.SavingMoneyUnina.control.Controller;
+import it.unina.maven.SavingMoneyUnina.entities.Categoria;
 import it.unina.maven.SavingMoneyUnina.entities.Portafogli;
 import it.unina.maven.SavingMoneyUnina.entities.Transazione;
 import it.unina.maven.SavingMoneyUnina.entities.Utente;
@@ -82,7 +83,7 @@ public class InformazioniPortafogli extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setBackground(new Color(35, 21, 40));
-		panel.setBounds(24, 24, 210, 156);
+		panel.setBounds(24, 24, 210, 202);
 		getContentPane().add(panel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Portafogli");
@@ -106,26 +107,49 @@ public class InformazioniPortafogli extends JFrame {
 		JLabel lblTransazioni = new JLabel("Transazioni");
 		lblTransazioni.setForeground(Color.WHITE);
 		lblTransazioni.setFont(new Font("Helvetica", Font.BOLD, 13));
-		lblTransazioni.setBounds(18, 66, 105, 20);
+		lblTransazioni.setBounds(18, 70, 105, 18);
 		panel.add(lblTransazioni);
 		
 		JLabel lblNumtrans = new JLabel(Integer.toString(p.getTransazioni().size()));
 		lblNumtrans.setForeground(Color.WHITE);
 		lblNumtrans.setFont(new Font("Helvetica", Font.PLAIN, 12));
-		lblNumtrans.setBounds(104, 64, 181, 24);
+		lblNumtrans.setBounds(104, 70, 181, 18);
 		panel.add(lblNumtrans);
 		
 		JLabel lblParoleChiave = new JLabel("Parole chiave");
 		lblParoleChiave.setForeground(Color.WHITE);
 		lblParoleChiave.setFont(new Font("Helvetica", Font.BOLD, 13));
-		lblParoleChiave.setBounds(18, 90, 105, 20);
+		lblParoleChiave.setBounds(18, 100, 105, 20);
 		panel.add(lblParoleChiave);
 		
 		JLabel lblParolechiave = new JLabel(p.getParoleChiaveString());
 		lblParolechiave.setForeground(Color.WHITE);
 		lblParolechiave.setFont(new Font("Helvetica", Font.PLAIN, 12));
-		lblParolechiave.setBounds(18, 105, 181, 45);
+		lblParolechiave.setBounds(18, 116, 181, 22);
 		panel.add(lblParolechiave);
+		
+		JLabel lblParoleChiave_1 = new JLabel("Categorie");
+		lblParoleChiave_1.setForeground(Color.WHITE);
+		lblParoleChiave_1.setFont(new Font("Helvetica", Font.BOLD, 13));
+		lblParoleChiave_1.setBounds(18, 148, 105, 20);
+		panel.add(lblParoleChiave_1);
+		
+		String categorie = "";
+		ArrayList<Categoria> cc = p.getCategorie();
+		if(cc.size() > 0) {
+			for(Categoria c : p.getCategorie()) {
+				categorie += c.getNome() + ", ";
+			}
+			categorie = categorie.substring(0, categorie.length()-2);
+		}else {
+			categorie = "Nessuna";
+		}
+		
+		JLabel lblCategorie = new JLabel(categorie);
+		lblCategorie.setForeground(Color.WHITE);
+		lblCategorie.setFont(new Font("Helvetica", Font.PLAIN, 12));
+		lblCategorie.setBounds(18, 165, 181, 24);
+		panel.add(lblCategorie);
 		setTitle("Informazioni portafogli");
 		
 		for(int i=0; i<transazioni.size(); ++i) {
@@ -133,8 +157,8 @@ public class InformazioniPortafogli extends JFrame {
 			JPanel panel_3_1 = new JPanel();
 			panel_3_1.setLayout(null);
 			panel_3_1.setBackground(new Color(53, 45, 72));
-			panel_3_1.setBounds(2, 6+53*i, 192, 43);
-			panel_4.add(panel_3_1);
+			panel_3_1.setBounds(2, 6+53*i, 220, 43);
+			panel_2_1.add(panel_3_1);
 			
 			JLabel lblNewLabel_1_2_3 = new JLabel((t.getTipo().equals("entrata") ? "+" : "-") + " " + controller.formatMoney(t.getValore()));
 			lblNewLabel_1_2_3.setForeground(Color.WHITE);

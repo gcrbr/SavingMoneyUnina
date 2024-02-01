@@ -74,14 +74,6 @@ public class Utente {
 		this.portafogli = portafogli;
 	}
 	
-	public void removeContoCorrente(ContoCorrente cc) {
-		contigestiti.remove(cc);
-	}
-	
-	public void addContoCorrente(ContoCorrente cc) {
-		contigestiti.add(cc);
-	}
-	
 	public double getSaldoTotaleConti() {
 		try {
 			return new UtenteDao().getSaldoTotaleConti(this);
@@ -91,11 +83,15 @@ public class Utente {
 		return 0;
 	}
 	
-	public void creaNuovoConto(ContoCorrente cc, Carta c) throws SQLException {
+	public void addContoCorrente(ContoCorrente cc, Carta c) throws SQLException {
 		new UtenteDao().inserisciNuovoConto(this, cc, c);
 	}
 	
 	public void refreshContiGestiti() {
 		this.getContigestiti().clear();
+	}
+	
+	public int addPortafogli(Portafogli p) throws SQLException {
+		return new UtenteDao().inserisciNuovoPortafogli(this, p);
 	}
 }

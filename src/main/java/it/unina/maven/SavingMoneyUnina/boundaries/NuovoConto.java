@@ -171,7 +171,7 @@ public class NuovoConto extends JFrame {
 					cc.setIban(iban.getText());
 					cc.setSaldo(Double.parseDouble(saldo.getText()));
 					
-					utente.creaNuovoConto(cc, c);
+					utente.addContoCorrente(cc, c);
 					utente.refreshContiGestiti();
 					
 					controller.reloadFrame(caller);

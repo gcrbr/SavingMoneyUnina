@@ -11,6 +11,7 @@ public class Portafogli {
 	private Utente utente;
 	private ArrayList<Transazione> transazioni = new ArrayList<>();
 	private ArrayList<String> paroleChiave = new ArrayList<>();
+	private ArrayList<Categoria> categorie = new ArrayList<>();
 	
 	public int getIdportafogli() {
 		return idportafogli;
@@ -74,6 +75,32 @@ public class Portafogli {
 		}
 		return "";
 	}
-
 	
+	public void addTransazione(Transazione t) throws SQLException{
+		new PortafogliDao().addTransazione(this, t);
+	}
+	
+	public void setParoleChiaveString(String parolechiave) throws SQLException{
+		new PortafogliDao().addParoleChiaveMultiple(this, parolechiave);
+	}
+	
+	public void setCategorie(ArrayList<Categoria> c) {
+		this.categorie = c;
+	}
+	
+	public ArrayList<Categoria> getCategorie() {
+		try {
+			setCategorie(new PortafogliDao().getCategorie(this));
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return categorie;
+	}
+	
+	public void addCategoria(Categoria c) throws SQLException{
+		new PortafogliDao().addCategoria(this, c);
+	}
+	
+	
+
 }

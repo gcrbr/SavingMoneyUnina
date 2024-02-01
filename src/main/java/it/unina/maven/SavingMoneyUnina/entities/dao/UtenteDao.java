@@ -117,4 +117,17 @@ public class UtenteDao {
 		stm.execute();
 	}
 	
+	public int inserisciNuovoPortafogli(Utente u, Portafogli p) throws SQLException {
+		database = ConnectionDatabase.getInstance();
+		connection = database.getConnection();
+		PreparedStatement stm = connection.prepareStatement("INSERT INTO PORTAFOGLI(nome, email) VALUES (?, ?) RETURNING idportafogli;");
+		stm.setString(1, p.getNome());
+		stm.setString(2, u.getEmail());
+		ResultSet rs = stm.executeQuery();
+		while(rs.next()) {
+			return rs.getInt(1);
+		}
+		return 0;
+	}
+	
 }

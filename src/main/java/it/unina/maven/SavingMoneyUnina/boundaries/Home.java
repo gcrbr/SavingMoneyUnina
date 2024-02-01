@@ -142,6 +142,11 @@ public class Home extends JFrame {
 		panel_4.add(scrollPane_1);
 		
 		JButton Accedi = new JButton("+ Crea portafogli");
+		Accedi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controller.showNuovoPortafogli(utente);
+			}
+		});
 		Accedi.setOpaque(true);
 		Accedi.setForeground(Color.WHITE);
 		Accedi.setFont(new Font("Helvetica", Font.PLAIN, 14));

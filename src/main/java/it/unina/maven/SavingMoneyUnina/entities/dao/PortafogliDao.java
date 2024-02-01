@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import it.unina.maven.SavingMoneyUnina.ConnectionDatabase;
+import it.unina.maven.SavingMoneyUnina.entities.Categoria;
 import it.unina.maven.SavingMoneyUnina.entities.Portafogli;
 import it.unina.maven.SavingMoneyUnina.entities.Transazione;
 
@@ -18,18 +18,18 @@ public class PortafogliDao {
 	public ArrayList<Transazione> getTransazioni(Portafogli portafogli) throws SQLException {
 		database = ConnectionDatabase.getInstance();
 		connection = database.getConnection();
-		PreparedStatement stm = connection.prepareStatement("SELECT * FROM transazione_portafogli NATURAL JOIN transazione WHERE idportafogli=?");
+		PreparedStatement stm = connection.prepareStatement("SELECT * FROM transazione_portafogli NATURAL JOIN transazione WHERE idportafogli=? ORDER BY data DESC, idtransazione DESC");
 		stm.setInt(1, portafogli.getIdportafogli());
 		ArrayList<Transazione> transazioni = new ArrayList<>();
 		ResultSet rs = stm.executeQuery();
 		while(rs.next()) {
 			Transazione t = new Transazione();
 			t.setIdtransazione(rs.getInt(1));
-			t.setValore(rs.getDouble(2));
-			t.setData(rs.getDate(3));
-			t.setDescrizione(rs.getString(4));
-			t.setAltroIban(rs.getString(5));
+			t.setValore(rs.getDouble(3));
+			t.setData(rs.getDate(4));
+			t.setDescrizione(rs.getString(5));
 			t.setTipo(rs.getString(6));
+			t.setAltroIban(rs.getString(7));
 			transazioni.add(t);
 		}
 		return transazioni;
@@ -60,4 +60,45 @@ public class PortafogliDao {
 		return "";
 	}
 	
+	public void addTransazione(Portafogli portafogli, Transazione transazione) throws SQLException {
+		database = ConnectionDatabase.getInstance();
+		connection = database.getConnection();
+		PreparedStatement stm = connection.prepareStatement("INSERT INTO transazione_portafogli VALUES(?, ?)");
+		stm.setInt(1, transazione.getIdtransazione());
+		stm.setInt(2, portafogli.getIdportafogli());
+		stm.execute();
+	}
+	
+	public void addParoleChiaveMultiple(Portafogli p, String parolechiave) throws SQLException {
+		database = ConnectionDatabase.getInstance();
+		connection = database.getConnection();
+		PreparedStatement stm = connection.prepareStatement("CALL inserisci_parolechiave_multiple(?, ?)");
+		stm.setInt(1, p.getIdportafogli());
+		stm.setString(2, parolechiave);
+		stm.execute();
+	}
+	
+	public void addCategoria(Portafogli p, Categoria c) throws SQLException {
+		database = ConnectionDatabase.getInstance();
+		connection = database.getConnection();
+		PreparedStatement stm = connection.prepareStatement("INSERT INTO portafogli_categoria VALUES(?, ?)");
+		stm.setInt(1, p.getIdportafogli());
+		stm.setString(2, c.getNome());
+		stm.execute();
+	}
+	
+	public ArrayList<Categoria> getCategorie(Portafogli p) throws SQLException {
+		database = ConnectionDatabase.getInstance();
+		connection = database.getConnection();
+		PreparedStatement stm = connection.prepareStatement("SELECT nomecategoria FROM portafogli_categoria WHERE idportafogli = ?");
+		stm.setInt(1, p.getIdportafogli());
+		ArrayList<Categoria> categorie = new ArrayList<>();
+		ResultSet rs = stm.executeQuery();
+		while(rs.next()) {
+			Categoria c = new Categoria();
+			c.setNome(rs.getString(1));
+			categorie.add(c);
+		}
+		return categorie;
+	}
 }

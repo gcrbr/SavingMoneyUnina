@@ -2,6 +2,7 @@ package it.unina.maven.SavingMoneyUnina.control;
 
 import java.sql.SQLException;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
@@ -10,10 +11,13 @@ import it.unina.maven.SavingMoneyUnina.boundaries.InformazioniConto;
 import it.unina.maven.SavingMoneyUnina.boundaries.InformazioniPortafogli;
 import it.unina.maven.SavingMoneyUnina.boundaries.NuovaTransazione;
 import it.unina.maven.SavingMoneyUnina.boundaries.NuovoConto;
+import it.unina.maven.SavingMoneyUnina.boundaries.NuovoPortafogli;
 import it.unina.maven.SavingMoneyUnina.boundaries.SceltaManualeTransazione;
+import it.unina.maven.SavingMoneyUnina.entities.Categoria;
 import it.unina.maven.SavingMoneyUnina.entities.ContoCorrente;
 import it.unina.maven.SavingMoneyUnina.entities.Portafogli;
 import it.unina.maven.SavingMoneyUnina.entities.Utente;
+import it.unina.maven.SavingMoneyUnina.entities.dao.CategoriaDao;
 import it.unina.maven.SavingMoneyUnina.entities.dao.UtenteDao;
 
 public class Controller {
@@ -64,5 +68,19 @@ public class Controller {
 	public void showSceltaManuale(Utente u, Portafogli p) {
 		SceltaManualeTransazione smt = new SceltaManualeTransazione(u, p);
 		smt.setVisible(true);
+	}
+	
+	public void showNuovoPortafogli(Utente u) {
+		NuovoPortafogli np = new NuovoPortafogli(u);
+		np.setVisible(true);
+	}
+	
+	public ArrayList<Categoria> getCategorie() {
+		try {
+			return new CategoriaDao().getCategorie();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

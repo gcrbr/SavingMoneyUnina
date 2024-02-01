@@ -33,6 +33,7 @@ public class NuovaTransazione extends JFrame {
 	private Controller controller = new Controller();
 	
 	public NuovaTransazione(final JFrame caller, final ContoCorrente cc) {
+		setResizable(false);
 		setTitle("Aggiungi transazione");
 		getContentPane().setBackground(new Color(28, 21, 40));
 		getContentPane().setLayout(null);
