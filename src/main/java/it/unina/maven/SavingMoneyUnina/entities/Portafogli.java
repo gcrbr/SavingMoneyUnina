@@ -50,10 +50,6 @@ public class Portafogli {
 		this.transazioni = t;
 	}
 	
-	public void refreshTransazioni() {
-		this.getTransazioni().clear();
-	}
-
 	public ArrayList<String> getParoleChiave() {
 		try {
 			setParoleChiave(new PortafogliDao().getParoleChiave(this));
@@ -101,6 +97,12 @@ public class Portafogli {
 		new PortafogliDao().addCategoria(this, c);
 	}
 	
+	public void deleteTransazione(Transazione t) throws SQLException {
+		new PortafogliDao().deleteTransazione(this, t);
+	}
 	
-
+	public void delete() throws SQLException {
+		new PortafogliDao().deletePortafogli(this);
+	}
+	
 }

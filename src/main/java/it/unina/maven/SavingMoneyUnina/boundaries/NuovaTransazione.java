@@ -37,7 +37,8 @@ public class NuovaTransazione extends JFrame {
 		setTitle("Aggiungi transazione");
 		getContentPane().setBackground(new Color(28, 21, 40));
 		getContentPane().setLayout(null);
-		setBounds(100, 100, 291, 449);
+		setSize(291, 449);
+		setLocationRelativeTo(null);
 		
 		final JLabel lblIban = new JLabel("IBAN");
 		lblIban.setForeground(new Color(172, 163, 175));
@@ -153,14 +154,17 @@ public class NuovaTransazione extends JFrame {
 					t.setValore(Double.parseDouble(textField_1.getText()));
 					t.setDescrizione(textField_2.getText());
 					t.setTipo(comboBox.getSelectedItem().toString().toLowerCase());
-					t.setData(new Date(
+					t.setData(controller.getDate(
 							Integer.parseInt(textField_5.getText()),
 							Integer.parseInt(textField_4.getText()),
 							Integer.parseInt(textField_3.getText())
 					));
 					cc.addTransazione(t);
-					cc.refreshTransazioni();
 					
+					((InformazioniConto)caller).getContentPane().removeAll();
+					((InformazioniConto)caller).load();
+					((InformazioniConto)caller).revalidate();
+					((InformazioniConto)caller).repaint();
 					JOptionPane.showMessageDialog(null, "Transazione aggiunta con successo.");
 					setVisible(false);
 				}catch(SQLException e1) {

@@ -60,7 +60,8 @@ public class Login extends JFrame {
 		setResizable(false);
 		setTitle("SavingMoneyUnina");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 590, 308);
+		setSize(590, 308);
+		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(28, 21, 41));
 		contentPane.setForeground(new Color(0, 0, 0));
@@ -90,7 +91,7 @@ public class Login extends JFrame {
 					
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "I campi email e password sono vuoti");
+					JOptionPane.showMessageDialog(null, "I campi email o password sono vuoti");
 				}
 				
 			}

@@ -59,12 +59,10 @@ public class ContoCorrente {
 	}
 	
 	public ArrayList<Transazione> getTransazioni() {
-		if(transazioni.isEmpty()) {
-			try {
-				setTransazioni(new ContoCorrenteDao().getTransazioni(this));
-			}catch(SQLException e) {
-				e.printStackTrace();
-			}
+		try {
+			setTransazioni(new ContoCorrenteDao().getTransazioni(this));
+		}catch(SQLException e) {
+			e.printStackTrace();
 		}
 		return transazioni;
 	}
@@ -77,7 +75,11 @@ public class ContoCorrente {
 		new ContoCorrenteDao().aggiungiTransazione(this, t);
 	}
 	
-	public void refreshTransazioni() {
-		this.getTransazioni().clear();
+	public void removeTransazione(Transazione t) throws SQLException {
+		new ContoCorrenteDao().deleteTransazione(this, t);
+	}
+	
+	public void delete() throws SQLException {
+		new ContoCorrenteDao().deleteConto(this);
 	}
 }

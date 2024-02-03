@@ -26,14 +26,15 @@ import it.unina.maven.SavingMoneyUnina.entities.Utente;
 public class SceltaManualeTransazione extends JFrame {
 	private Controller controller = new Controller();
 	
-	public SceltaManualeTransazione(final Utente u, final Portafogli p) {
+	public SceltaManualeTransazione(final JFrame caller, final Utente u, final Portafogli p) {
 		setResizable(false);
 		setTitle("Scegli una transazione da aggiungere");
 		getContentPane().setBackground(new Color(28, 21, 40));
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(28, 21, 40));
-		setBounds(100, 100, 338, 443);
+		setSize(338, 443);
+		setLocationRelativeTo(null);
 		
 		JScrollPane scrollPane = new JScrollPane(panel);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -45,7 +46,7 @@ public class SceltaManualeTransazione extends JFrame {
 		
 		int h = 0;
 		for(ContoCorrente c : conti) {
-			h += 20 + (53+15)*c.getTransazioni().size();
+			h += 20 + (73+15)*c.getTransazioni().size();
 		}
 		
 		panel.setPreferredSize(new Dimension(500, h));
@@ -56,12 +57,12 @@ public class SceltaManualeTransazione extends JFrame {
 			ArrayList<Transazione> transazioni = c.getTransazioni();
 			
 			if(i>0) {
-				startH += 6 + 12 + (53+15)*conti.get(i-1).getTransazioni().size();
+				startH += 6 + 12 + (73+15)*conti.get(i-1).getTransazioni().size();
 			}
 			
 			JPanel bloccoConto = new JPanel();
 			bloccoConto.setBackground(new Color(35, 21, 40));
-			bloccoConto.setBounds(6, (i==0) ? 6 : startH, 326, 10+(53+15)*transazioni.size());
+			bloccoConto.setBounds(6, (i==0) ? 6 : startH, 326, 10+(73+15)*transazioni.size());
 			panel.add(bloccoConto);
 			bloccoConto.setLayout(null);
 			
@@ -76,7 +77,7 @@ public class SceltaManualeTransazione extends JFrame {
 				
 				JPanel bloccoTransazione = new JPanel();
 				bloccoTransazione.setBackground(new Color(28, 21, 40));
-				bloccoTransazione.setBounds(6, 37+63*j, 314, 53);
+				bloccoTransazione.setBounds(6, 37+83*j, 314, 73);
 				bloccoConto.add(bloccoTransazione);
 				bloccoTransazione.setLayout(null);
 				
@@ -92,13 +93,20 @@ public class SceltaManualeTransazione extends JFrame {
 				lblNewLabel_1_1_1.setBounds(16, 22, 292, 25);
 				bloccoTransazione.add(lblNewLabel_1_1_1);
 				
+				JLabel lblNewLabel_1_2_4 = new JLabel(controller.dateToString(t.getData()));
+				lblNewLabel_1_2_4.setForeground(new Color(255, 255, 255));
+				lblNewLabel_1_2_4.setFont(new Font("Helvetica", Font.ITALIC, 13));
+				lblNewLabel_1_2_4.setBackground(Color.WHITE);
+				lblNewLabel_1_2_4.setBounds(16, 44, 350, 13);
+				bloccoTransazione.add(lblNewLabel_1_2_4);
+				
 				JButton btnInserisciTransazione = new JButton("+");
 				btnInserisciTransazione.setOpaque(true);
 				btnInserisciTransazione.setForeground(Color.WHITE);
 				btnInserisciTransazione.setFont(new Font("Helvetica", Font.BOLD, 20));
 				btnInserisciTransazione.setBorderPainted(false);
 				btnInserisciTransazione.setBackground(new Color(53, 45, 72));
-				btnInserisciTransazione.setBounds(242, 6, 66, 42);
+				btnInserisciTransazione.setBounds(242, 6, 66, 52);
 				bloccoTransazione.add(btnInserisciTransazione);
 				
 				btnInserisciTransazione.addActionListener(new ActionListener() {
@@ -106,7 +114,14 @@ public class SceltaManualeTransazione extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						try {
 							p.addTransazione(t);
+							
+							((InformazioniPortafogli)caller).getContentPane().removeAll();
+							((InformazioniPortafogli)caller).load();
+							((InformazioniPortafogli)caller).revalidate();
+							((InformazioniPortafogli)caller).repaint();
+							
 							JOptionPane.showMessageDialog(null, "Transazione aggiunta con successo");
+							setVisible(false);
 						}catch(SQLException e1) {
 							JOptionPane.showMessageDialog(null, "Si è verificato un errore interno: " + e1.getLocalizedMessage());
 						}catch(Exception e2) {

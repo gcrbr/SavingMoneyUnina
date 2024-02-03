@@ -27,11 +27,12 @@ public class NuovoPortafogli extends JFrame {
 	private JTextField textField_1;
 	private Controller controller = new Controller();
 	
-	public NuovoPortafogli(final Utente u) {
+	public NuovoPortafogli(final JFrame caller, final Utente u) {
 		setResizable(false);
 		getContentPane().setBackground(new Color(28, 21, 40));
 		getContentPane().setLayout(null);
-		setBounds(100, 100, 477, 288);
+		setSize(477, 288);
+		setLocationRelativeTo(null);
 		
 		JLabel lblNome = new JLabel("NOME");
 		lblNome.setForeground(new Color(172, 163, 175));
@@ -95,7 +96,9 @@ public class NuovoPortafogli extends JFrame {
 							p.addCategoria(c);
 						}
 					}
+					((Home)caller).load();
 					JOptionPane.showMessageDialog(null, "Portafogli creato con successo");
+					setVisible(false);
 				}catch(SQLException e1) {
 					JOptionPane.showMessageDialog(null, "Si è verificato un errore interno: " + e1.getLocalizedMessage());
 				}catch(Exception e2) {

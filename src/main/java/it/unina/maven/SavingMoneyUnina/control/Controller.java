@@ -1,8 +1,11 @@
 package it.unina.maven.SavingMoneyUnina.control;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.JFrame;
 
@@ -12,6 +15,8 @@ import it.unina.maven.SavingMoneyUnina.boundaries.InformazioniPortafogli;
 import it.unina.maven.SavingMoneyUnina.boundaries.NuovaTransazione;
 import it.unina.maven.SavingMoneyUnina.boundaries.NuovoConto;
 import it.unina.maven.SavingMoneyUnina.boundaries.NuovoPortafogli;
+import it.unina.maven.SavingMoneyUnina.boundaries.ReportMensile;
+import it.unina.maven.SavingMoneyUnina.boundaries.RicercaAvanzata;
 import it.unina.maven.SavingMoneyUnina.boundaries.SceltaManualeTransazione;
 import it.unina.maven.SavingMoneyUnina.entities.Categoria;
 import it.unina.maven.SavingMoneyUnina.entities.ContoCorrente;
@@ -56,22 +61,18 @@ public class Controller {
 		nt.setVisible(true);
 	}
 	
-	public void reloadFrame(JFrame frame) {
-		frame.repaint();
-	}
-	
 	public void showInformazioniPortafogli(Utente u, Portafogli p) {
 		InformazioniPortafogli ip = new InformazioniPortafogli(u, p);
 		ip.setVisible(true);
 	}
 	
-	public void showSceltaManuale(Utente u, Portafogli p) {
-		SceltaManualeTransazione smt = new SceltaManualeTransazione(u, p);
+	public void showSceltaManuale(JFrame caller, Utente u, Portafogli p) {
+		SceltaManualeTransazione smt = new SceltaManualeTransazione(caller, u, p);
 		smt.setVisible(true);
 	}
 	
-	public void showNuovoPortafogli(Utente u) {
-		NuovoPortafogli np = new NuovoPortafogli(u);
+	public void showNuovoPortafogli(JFrame caller, Utente u) {
+		NuovoPortafogli np = new NuovoPortafogli(caller, u);
 		np.setVisible(true);
 	}
 	
@@ -83,4 +84,30 @@ public class Controller {
 		}
 		return null;
 	}
+	
+	public void showRicercaAvanzata(Utente u) {
+		RicercaAvanzata ra = new RicercaAvanzata(u);
+		ra.setVisible(true);
+	}
+	
+	public void showReportMensile(Utente u) {
+		ReportMensile rm = new ReportMensile(u);
+		rm.setVisible(true);
+	}
+	
+	public Date getDate(int anno, int mese, int giorno) {
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, anno);
+		cal.set(Calendar.MONTH, mese - 1);
+		cal.set(Calendar.DAY_OF_MONTH, giorno);
+		cal.set(Calendar.HOUR, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		return new Date(cal.getTimeInMillis());
+	}
+	
+	public String dateToString(Date date) {
+		return new SimpleDateFormat("dd/MM/yyyy").format(date);
+	}
+	
 }

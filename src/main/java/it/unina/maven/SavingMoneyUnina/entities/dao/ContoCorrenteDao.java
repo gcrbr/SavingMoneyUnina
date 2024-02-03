@@ -98,4 +98,21 @@ public class ContoCorrenteDao {
 		}
 		return 0;
 	}
+	
+	public void deleteTransazione(ContoCorrente cc, Transazione t) throws SQLException {
+		database = ConnectionDatabase.getInstance();
+		connection = database.getConnection();
+		PreparedStatement stm = connection.prepareStatement("DELETE FROM Transazione WHERE iban = ? AND idtransazione = ?");
+		stm.setString(1, cc.getIban());
+		stm.setInt(2, t.getIdtransazione());
+		stm.execute();
+	}
+	
+	public void deleteConto(ContoCorrente cc) throws SQLException {
+		database = ConnectionDatabase.getInstance();
+		connection = database.getConnection();
+		PreparedStatement stm = connection.prepareStatement("DELETE FROM ContoCorrente WHERE iban = ?");
+		stm.setString(1, cc.getIban());
+		stm.execute();
+	}
 }

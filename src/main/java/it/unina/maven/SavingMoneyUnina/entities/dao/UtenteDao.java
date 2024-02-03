@@ -130,4 +130,34 @@ public class UtenteDao {
 		return 0;
 	}
 	
+	public ArrayList<Object[]> getReportMensile(Utente u, int mese, int anno) throws SQLException {
+		database = ConnectionDatabase.getInstance();
+		connection = database.getConnection();
+		PreparedStatement stm = connection.prepareStatement("SELECT report_mensile(?, ?, ?)");
+		stm.setInt(1, mese);
+		stm.setInt(2, anno);
+		stm.setString(3, u.getEmail());
+		ArrayList<Object[]> ret = new ArrayList<>();
+		ResultSet rs = stm.executeQuery();
+		while(rs.next()) {
+			String risultato = rs.getString(1);
+			String[] righe = risultato.split(",");
+			for(String riga : righe) {
+				String[] colonne = riga.split(";");
+				ret.add(new Object[] {
+					colonne[0], //iban
+					Double.parseDouble(colonne[1]), //entrataMax
+					Double.parseDouble(colonne[2]), //entrataAvg
+					Double.parseDouble(colonne[3]), //entrataMin
+					Double.parseDouble(colonne[4]), //uscitaMax
+					Double.parseDouble(colonne[5]), //uscitaAvg
+					Double.parseDouble(colonne[6]), //uscitaMin
+					Double.parseDouble(colonne[7]), //saldoIniziale
+					Double.parseDouble(colonne[8]), //saldoFinale
+				});
+			}
+		}
+		return ret;
+	}
+	
 }

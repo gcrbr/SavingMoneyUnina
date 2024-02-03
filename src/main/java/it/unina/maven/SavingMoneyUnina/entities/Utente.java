@@ -44,24 +44,20 @@ public class Utente {
 	}
 	
 	public ArrayList<ContoCorrente> getContigestiti() {
-		if(contigestiti.isEmpty()) {
-			try {
-				this.setContigestiti(new UtenteDao().getContiGestiti(this));
-			}catch(SQLException e) {
-				e.printStackTrace();
-			}
+		try {
+			this.setContigestiti(new UtenteDao().getContiGestiti(this));
+		}catch(SQLException e) {
+			e.printStackTrace();
 		}
 		return contigestiti;
 	}
 	
 	public ArrayList<Portafogli> getPortafogli() {
-		if(portafogli.isEmpty()) {
-			try {
-				ArrayList<Portafogli> p = new UtenteDao().getPortafogli(this);
-				setPortafogli(p);
- 			}catch(SQLException e) {
-				e.printStackTrace();
-			}
+		try {
+			ArrayList<Portafogli> p = new UtenteDao().getPortafogli(this);
+			setPortafogli(p);
+ 		}catch(SQLException e) {
+			e.printStackTrace();
 		}
 		return portafogli;
 	}
@@ -87,11 +83,11 @@ public class Utente {
 		new UtenteDao().inserisciNuovoConto(this, cc, c);
 	}
 	
-	public void refreshContiGestiti() {
-		this.getContigestiti().clear();
-	}
-	
 	public int addPortafogli(Portafogli p) throws SQLException {
 		return new UtenteDao().inserisciNuovoPortafogli(this, p);
+	}
+	
+	public ArrayList<Object[]> getReportMensile(int mese, int anno) throws SQLException {
+		return new UtenteDao().getReportMensile(this, mese, anno);
 	}
 }

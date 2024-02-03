@@ -101,4 +101,21 @@ public class PortafogliDao {
 		}
 		return categorie;
 	}
+	
+	public void deleteTransazione(Portafogli p, Transazione t) throws SQLException {
+		database = ConnectionDatabase.getInstance();
+		connection = database.getConnection();
+		PreparedStatement stm = connection.prepareStatement("DELETE FROM transazione_portafogli WHERE idtransazione = ? AND idportafogli = ?");
+		stm.setInt(1, t.getIdtransazione());
+		stm.setInt(2, p.getIdportafogli());
+		stm.execute();
+	}
+	
+	public void deletePortafogli(Portafogli p) throws SQLException {
+		database = ConnectionDatabase.getInstance();
+		connection = database.getConnection();
+		PreparedStatement stm = connection.prepareStatement("DELETE FROM portafogli WHERE idportafogli = ?");
+		stm.setInt(1, p.getIdportafogli());
+		stm.execute();
+	}
 }

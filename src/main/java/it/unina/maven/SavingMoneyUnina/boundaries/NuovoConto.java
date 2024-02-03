@@ -39,7 +39,8 @@ public class NuovoConto extends JFrame {
 		setTitle("Aggiungi conto");
 		getContentPane().setBackground(new Color(28, 21, 40));
 		getContentPane().setLayout(null);
-		setBounds(100, 100, 294, 579);
+		setSize(294, 579);
+		setLocationRelativeTo(null);
 		
 		JLabel lblNewLabel = new JLabel("IBAN");
 		lblNewLabel.setBounds(19, 25, 267, 13);
@@ -134,6 +135,7 @@ public class NuovoConto extends JFrame {
 		getContentPane().add(lblCodiceDiSicurezza);
 		
 		final JComboBox comboBox = new JComboBox();
+		comboBox.setForeground(new Color(0, 0, 0));
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Credito", "Debito"}));
 		comboBox.setSelectedIndex(0);
 		comboBox.setBounds(19, 243, 258, 27);
@@ -147,12 +149,11 @@ public class NuovoConto extends JFrame {
 		
 		JButton btnAggiungi = new JButton("+ Aggiungi");
 		btnAggiungi.addActionListener(new ActionListener() {
-			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Carta c = new Carta();
 					c.setNumero(numcarta.getText());
-					c.setScadenza(new Date(
+					c.setScadenza(controller.getDate(
 							Integer.parseInt(annoscad.getText()),
 							Integer.parseInt(mesescad.getText()),
 							Integer.parseInt(giornoscad.getText())
@@ -161,20 +162,20 @@ public class NuovoConto extends JFrame {
 					c.setTipo(comboBox.getSelectedItem().toString().toLowerCase());
 					
 					if(c.getTipo().equals("credito")) {
-						c.setPlafond(Double.parseDouble(plafondLbl.getText()));
+						c.setPlafond(Double.parseDouble(jolly.getText()));
 					}else {
-						c.setLimitespesa(Double.parseDouble(plafondLbl.getText()));
+						c.setLimitespesa(Double.parseDouble(jolly.getText()));
 					}
 					
 					ContoCorrente cc = new ContoCorrente();
+					
 					cc.setCarta(c);
 					cc.setIban(iban.getText());
 					cc.setSaldo(Double.parseDouble(saldo.getText()));
 					
 					utente.addContoCorrente(cc, c);
-					utente.refreshContiGestiti();
 					
-					controller.reloadFrame(caller);
+					((Home)caller).load();
 					
 					JOptionPane.showMessageDialog(null, "Conto aggiunto con successo");
 					setVisible(false);
@@ -192,8 +193,6 @@ public class NuovoConto extends JFrame {
 		btnAggiungi.setBackground(new Color(53, 45, 72));
 		btnAggiungi.setBounds(19, 502, 258, 30);
 		getContentPane().add(btnAggiungi);
-		
-		
 		
 		JLabel lblTipoCarta = new JLabel("TIPO CARTA");
 		lblTipoCarta.setForeground(new Color(172, 163, 175));
