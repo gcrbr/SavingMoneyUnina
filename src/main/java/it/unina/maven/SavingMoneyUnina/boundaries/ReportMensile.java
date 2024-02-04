@@ -224,7 +224,7 @@ public class ReportMensile extends JFrame {
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		getContentPane().add(scrollPane);
 		
-		JLabel lblAnno = new JLabel("IBAN");
+		JLabel lblAnno = new JLabel("ANNO");
 		lblAnno.setForeground(new Color(172, 163, 175));
 		lblAnno.setFont(new Font("Helvetica", Font.PLAIN, 13));
 		lblAnno.setBounds(22, 89, 267, 13);
@@ -238,7 +238,6 @@ public class ReportMensile extends JFrame {
 		textField.setBounds(22, 105, 258, 27);
 		textField.setText(String.valueOf(LocalDate.now().getYear()));
 		getContentPane().add(textField);
-		
 		
 	}
 }

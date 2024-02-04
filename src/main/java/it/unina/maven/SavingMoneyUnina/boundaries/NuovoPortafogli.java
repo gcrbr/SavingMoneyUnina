@@ -83,6 +83,21 @@ public class NuovoPortafogli extends JFrame {
 		JButton btnAggiungi = new JButton("+ Aggiungi");
 		btnAggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(textField.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Devi inserire il nome del portafogli");
+					return;
+				}
+				
+				int num_scelte = 0;
+				for(int i=0;i<categorie_scelte.size();++i) {
+					if(categorie_scelte.get(i).isSelected()) num_scelte++;
+				}
+				
+				if(num_scelte == 0) {
+					JOptionPane.showMessageDialog(null, "Devi scegliere almeno una categoria");
+					return;
+				}
+				
 				Portafogli p = new Portafogli();
 				p.setNome(textField.getText());
 				p.setUtente(u);

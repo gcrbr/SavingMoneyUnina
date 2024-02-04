@@ -148,6 +148,11 @@ public class NuovaTransazione extends JFrame {
 		btnAggiungi.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
+				if(textField.getText().isEmpty() || textField_2.getText().isEmpty() || textField_3.getText().isEmpty() || textField_4.getText().isEmpty() || textField_5.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Devi compilare tutti i campi");
+					return;
+				}
+				
 				try {
 					Transazione t = new Transazione();
 					t.setAltroIban(textField.getText());

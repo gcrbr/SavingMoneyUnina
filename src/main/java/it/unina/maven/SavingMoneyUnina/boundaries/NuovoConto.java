@@ -31,7 +31,7 @@ public class NuovoConto extends JFrame {
 	private JTextField mesescad;
 	private JTextField annoscad;
 	private JTextField cvv;
-	private JTextField jolly;
+	private JTextField limite_plafond;
 	private Controller controller = new Controller();
 	
 	public NuovoConto(final JFrame caller, final Utente utente) {
@@ -62,6 +62,7 @@ public class NuovoConto extends JFrame {
 		saldo.setBorder(new CompoundBorder(new LineBorder(new Color(172, 163, 175)), new EmptyBorder(5, 5, 5, 5)));
 		saldo.setBackground(Color.WHITE);
 		saldo.setBounds(19, 110, 258, 27);
+		saldo.setText("0");
 		getContentPane().add(saldo);
 		
 		JLabel lblSaldo = new JLabel("SALDO");
@@ -134,12 +135,12 @@ public class NuovoConto extends JFrame {
 		lblCodiceDiSicurezza.setBounds(19, 435, 267, 13);
 		getContentPane().add(lblCodiceDiSicurezza);
 		
-		final JComboBox comboBox = new JComboBox();
-		comboBox.setForeground(new Color(0, 0, 0));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Credito", "Debito"}));
-		comboBox.setSelectedIndex(0);
-		comboBox.setBounds(19, 243, 258, 27);
-		getContentPane().add(comboBox);
+		final JComboBox tipoCarta = new JComboBox();
+		tipoCarta.setForeground(new Color(0, 0, 0));
+		tipoCarta.setModel(new DefaultComboBoxModel(new String[] {"Credito", "Debito"}));
+		tipoCarta.setSelectedIndex(0);
+		tipoCarta.setBounds(19, 243, 258, 27);
+		getContentPane().add(tipoCarta);
 		
 		final JLabel plafondLbl = new JLabel("PLAFOND");
 		plafondLbl.setForeground(new Color(172, 163, 175));
@@ -150,6 +151,11 @@ public class NuovoConto extends JFrame {
 		JButton btnAggiungi = new JButton("+ Aggiungi");
 		btnAggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(iban.getText().isEmpty() || saldo.getText().isEmpty() || numcarta.getText().isEmpty() || giornoscad.getText().isEmpty() || mesescad.getText().isEmpty() || annoscad.getText().isEmpty() || cvv.getText().isEmpty() || limite_plafond.getText().isEmpty()) {
+					JOptionPane.showMessageDialog(null, "Devi compilare tutti i campi");
+					return;
+				}
+				
 				try {
 					Carta c = new Carta();
 					c.setNumero(numcarta.getText());
@@ -159,12 +165,12 @@ public class NuovoConto extends JFrame {
 							Integer.parseInt(giornoscad.getText())
 					));
 					c.setCvv(cvv.getText());
-					c.setTipo(comboBox.getSelectedItem().toString().toLowerCase());
+					c.setTipo(tipoCarta.getSelectedItem().toString().toLowerCase());
 					
 					if(c.getTipo().equals("credito")) {
-						c.setPlafond(Double.parseDouble(jolly.getText()));
+						c.setPlafond(Double.parseDouble(limite_plafond.getText()));
 					}else {
-						c.setLimitespesa(Double.parseDouble(jolly.getText()));
+						c.setLimitespesa(Double.parseDouble(limite_plafond.getText()));
 					}
 					
 					ContoCorrente cc = new ContoCorrente();
@@ -200,19 +206,19 @@ public class NuovoConto extends JFrame {
 		lblTipoCarta.setBounds(19, 230, 267, 13);
 		getContentPane().add(lblTipoCarta);
 		
-		jolly = new JTextField();
-		jolly.setFont(new Font("Helvetica", Font.PLAIN, 13));
-		jolly.setColumns(10);
-		jolly.setBorder(new CompoundBorder(new LineBorder(new Color(172, 163, 175)), new EmptyBorder(5, 5, 5, 5)));
-		jolly.setBackground(Color.WHITE);
-		jolly.setBounds(19, 308, 258, 27);
-		getContentPane().add(jolly);
+		limite_plafond = new JTextField();
+		limite_plafond.setFont(new Font("Helvetica", Font.PLAIN, 13));
+		limite_plafond.setColumns(10);
+		limite_plafond.setBorder(new CompoundBorder(new LineBorder(new Color(172, 163, 175)), new EmptyBorder(5, 5, 5, 5)));
+		limite_plafond.setBackground(Color.WHITE);
+		limite_plafond.setBounds(19, 308, 258, 27);
+		getContentPane().add(limite_plafond);
 		
-		comboBox.addActionListener(new ActionListener() {
+		tipoCarta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(comboBox.getSelectedIndex() == 0) { // credito
+				if(tipoCarta.getSelectedIndex() == 0) { // credito
 					plafondLbl.setText("PLAFOND");
-				}else if(comboBox.getSelectedIndex() == 1) { // debito
+				}else if(tipoCarta.getSelectedIndex() == 1) { // debito
 					plafondLbl.setText("LIMITE SPESA");
 				}
 			}
