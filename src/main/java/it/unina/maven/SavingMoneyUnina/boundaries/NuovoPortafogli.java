@@ -87,7 +87,7 @@ public class NuovoPortafogli extends JFrame {
 		btnAggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(textField.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Devi inserire il nome del portafogli");
+					n_controller.showAlert("Devi inserire il nome del portafogli");
 					return;
 				}
 				
@@ -97,7 +97,7 @@ public class NuovoPortafogli extends JFrame {
 				}
 				
 				if(num_scelte == 0) {
-					JOptionPane.showMessageDialog(null, "Devi scegliere almeno una categoria");
+					n_controller.showAlert("Devi scegliere almeno una categoria");
 					return;
 				}
 				
@@ -115,12 +115,12 @@ public class NuovoPortafogli extends JFrame {
 						}
 					}
 					((Home)caller).load();
-					JOptionPane.showMessageDialog(null, "Portafogli creato con successo");
+					n_controller.showAlert("Portafogli creato con successo");
 					setVisible(false);
 				}catch(SQLException e1) {
-					JOptionPane.showMessageDialog(null, "Si è verificato un errore interno: " + e1.getLocalizedMessage());
+					n_controller.showAlert("Si è verificato un errore interno: " + e1.getLocalizedMessage());
 				}catch(Exception e2) {
-					JOptionPane.showMessageDialog(null, "Si è verificato un errore: " + e2.getLocalizedMessage());
+					n_controller.showAlert("Si è verificato un errore: " + e2.getLocalizedMessage());
 				}
 			}
 		});

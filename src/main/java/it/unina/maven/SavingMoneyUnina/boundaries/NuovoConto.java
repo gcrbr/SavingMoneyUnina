@@ -154,7 +154,7 @@ public class NuovoConto extends JFrame {
 		btnAggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(iban.getText().isEmpty() || numcarta.getText().isEmpty() || giornoscad.getText().isEmpty() || mesescad.getText().isEmpty() || annoscad.getText().isEmpty() || cvv.getText().isEmpty() || limite_plafond.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Devi compilare tutti i campi");
+					n_controller.showAlert("Devi compilare tutti i campi");
 					return;
 				}
 				
@@ -185,12 +185,12 @@ public class NuovoConto extends JFrame {
 					
 					((Home)caller).load();
 					
-					JOptionPane.showMessageDialog(null, "Conto aggiunto con successo");
+					n_controller.showAlert("Conto aggiunto con successo");
 					setVisible(false);
 				}catch(SQLException e1) {
-					JOptionPane.showMessageDialog(null, "Si è verificato un errore interno: " + e1.getLocalizedMessage());
+					n_controller.showAlert("Si è verificato un errore interno: " + e1.getLocalizedMessage());
 				}catch(Exception e2) {
-					JOptionPane.showMessageDialog(null, "Si è verificato un errore: " + e2.getLocalizedMessage());
+					n_controller.showAlert("Si è verificato un errore: " + e2.getLocalizedMessage());
 				}
 			}
 		});

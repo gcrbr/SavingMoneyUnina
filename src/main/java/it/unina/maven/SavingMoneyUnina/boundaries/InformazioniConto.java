@@ -193,9 +193,9 @@ public class InformazioniConto extends JFrame {
 							repaint();
 						}
 					}catch(SQLException e1) {
-						JOptionPane.showMessageDialog(null, "Si è verificato un errore interno: " + e1.getLocalizedMessage());
+						n_controller.showAlert("Si è verificato un errore interno: " + e1.getLocalizedMessage());
 					}catch(Exception e2) {
-						JOptionPane.showMessageDialog(null, "Si è verificato un errore: " + e2.getLocalizedMessage());
+						n_controller.showAlert("Si è verificato un errore: " + e2.getLocalizedMessage());
 					}
 				}
 			});

@@ -85,15 +85,15 @@ public class Login extends JFrame {
 							n_controller.showHomePage(utenteLoggato);
 						}
 						else {
-							JOptionPane.showMessageDialog(null, "Credenziali errate");
+							n_controller.showAlert("Credenziali errate");
 						}
 					} catch (SQLException e1) {
-						JOptionPane.showMessageDialog(null, "Si è verificato un errore: " + e1.getLocalizedMessage());
+						n_controller.showAlert("Si è verificato un errore: " + e1.getLocalizedMessage());
 					}
 					
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "I campi email o password sono vuoti");
+					n_controller.showAlert("I campi email o password sono vuoti");
 				}
 				
 			}

@@ -122,12 +122,12 @@ public class SceltaManualeTransazione extends JFrame {
 							((InformazioniPortafogli)caller).revalidate();
 							((InformazioniPortafogli)caller).repaint();
 							
-							JOptionPane.showMessageDialog(null, "Transazione aggiunta con successo");
+							n_controller.showAlert("Transazione aggiunta con successo");
 							setVisible(false);
 						}catch(SQLException e1) {
-							JOptionPane.showMessageDialog(null, "Si è verificato un errore interno: " + e1.getLocalizedMessage());
+							n_controller.showAlert("Si è verificato un errore interno: " + e1.getLocalizedMessage());
 						}catch(Exception e2) {
-							JOptionPane.showMessageDialog(null, "Si è verificato un errore: " + e2.getLocalizedMessage());
+							n_controller.showAlert("Si è verificato un errore: " + e2.getLocalizedMessage());
 						}
 					}
 				});

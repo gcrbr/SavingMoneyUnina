@@ -204,11 +204,11 @@ public class RicercaAvanzata extends JFrame {
 		btnCerca.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(comboBox_1.getSelectedIndex() == 0 && comboBox_1_1.getSelectedIndex() == 0) {
-					JOptionPane.showMessageDialog(null, "Devi scegliere almeno un criterio di ricerca: Portafogli o ContoCorrente");
+					n_controller.showAlert("Devi scegliere almeno un criterio di ricerca: Portafogli o ContoCorrente");
 					return;
 				}
 				if(giornoDal.getText().isEmpty() || meseDal.getText().isEmpty() || annoDal.getText().isEmpty() || giornoAl.getText().isEmpty() || meseAl.getText().isEmpty() || annoAl.getText().isEmpty()) {
-					JOptionPane.showMessageDialog(null, "Devi inserire l'intervallo di date");
+					n_controller.showAlert("Devi inserire l'intervallo di date");
 					return;
 				}
 				Date date_from = d_controller.getDate(
@@ -235,9 +235,9 @@ public class RicercaAvanzata extends JFrame {
 						risultati = new TransazioneDao().cercaTransazione(u.getContigestiti().get(comboBox_1.getSelectedIndex()-1), u.getPortafogli().get(comboBox_1_1.getSelectedIndex()-1), date_from, date_to);
 					}
 				}catch(SQLException e1) {
-					JOptionPane.showMessageDialog(null, "Si è verificato un errore interno: " + e1.getLocalizedMessage());
+					n_controller.showAlert("Si è verificato un errore interno: " + e1.getLocalizedMessage());
 				}catch(Exception e2) {
-					JOptionPane.showMessageDialog(null, "Si è verificato un errore: " + e2.getLocalizedMessage());
+					n_controller.showAlert("Si è verificato un errore: " + e2.getLocalizedMessage());
 				}
 
 				panel.removeAll();

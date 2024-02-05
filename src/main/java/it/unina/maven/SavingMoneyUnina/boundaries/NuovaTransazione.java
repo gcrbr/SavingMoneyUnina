@@ -216,7 +216,7 @@ public class NuovaTransazione extends JFrame {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				if(hasEmptyFields()) {
-					JOptionPane.showMessageDialog(null, "Devi compilare tutti i campi");
+					n_controller.showAlert("Devi compilare tutti i campi");
 					return;
 				}
 				
@@ -237,12 +237,12 @@ public class NuovaTransazione extends JFrame {
 					((InformazioniConto)caller).load();
 					((InformazioniConto)caller).revalidate();
 					((InformazioniConto)caller).repaint();
-					JOptionPane.showMessageDialog(null, "Transazione aggiunta con successo.");
+					n_controller.showAlert("Transazione aggiunta con successo.");
 					setVisible(false);
 				}catch(SQLException e1) {
-					JOptionPane.showMessageDialog(null, "Si è verificato un errore interno: " + e1.getLocalizedMessage());
+					n_controller.showAlert("Si è verificato un errore interno: " + e1.getLocalizedMessage());
 				}catch(Exception e2) {
-					JOptionPane.showMessageDialog(null, "Si è verificato un errore: " + e2.getLocalizedMessage());
+					n_controller.showAlert("Si è verificato un errore: " + e2.getLocalizedMessage());
 				}
 			}
 		});
