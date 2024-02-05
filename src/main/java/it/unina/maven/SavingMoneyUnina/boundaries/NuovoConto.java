@@ -39,7 +39,7 @@ public class NuovoConto extends JFrame {
 		setTitle("Aggiungi conto");
 		getContentPane().setBackground(new Color(28, 21, 40));
 		getContentPane().setLayout(null);
-		setSize(294, 579);
+		setSize(294, 508);
 		setLocationRelativeTo(null);
 		
 		JLabel lblNewLabel = new JLabel("IBAN");
@@ -56,7 +56,7 @@ public class NuovoConto extends JFrame {
 		iban.setBounds(19, 41, 258, 27);
 		getContentPane().add(iban);
 		
-		saldo = new JTextField();
+		/*saldo = new JTextField();
 		saldo.setFont(new Font("Helvetica", Font.PLAIN, 13));
 		saldo.setColumns(10);
 		saldo.setBorder(new CompoundBorder(new LineBorder(new Color(172, 163, 175)), new EmptyBorder(5, 5, 5, 5)));
@@ -69,12 +69,12 @@ public class NuovoConto extends JFrame {
 		lblSaldo.setForeground(new Color(172, 163, 175));
 		lblSaldo.setFont(new Font("Helvetica", Font.PLAIN, 13));
 		lblSaldo.setBounds(19, 94, 267, 13);
-		getContentPane().add(lblSaldo);
+		getContentPane().add(lblSaldo);*/
 		
 		JLabel lblNumeroDellaCarta = new JLabel("NUMERO DELLA CARTA");
 		lblNumeroDellaCarta.setForeground(new Color(172, 163, 175));
 		lblNumeroDellaCarta.setFont(new Font("Helvetica", Font.PLAIN, 13));
-		lblNumeroDellaCarta.setBounds(19, 164, 267, 13);
+		lblNumeroDellaCarta.setBounds(19, 91, 267, 13);
 		getContentPane().add(lblNumeroDellaCarta);
 		
 		numcarta = new JTextField();
@@ -82,7 +82,7 @@ public class NuovoConto extends JFrame {
 		numcarta.setColumns(10);
 		numcarta.setBorder(new CompoundBorder(new LineBorder(new Color(172, 163, 175)), new EmptyBorder(5, 5, 5, 5)));
 		numcarta.setBackground(Color.WHITE);
-		numcarta.setBounds(19, 180, 258, 27);
+		numcarta.setBounds(19, 107, 258, 27);
 		getContentPane().add(numcarta);
 		
 		giornoscad = new JTextField();
@@ -90,13 +90,13 @@ public class NuovoConto extends JFrame {
 		giornoscad.setColumns(10);
 		giornoscad.setBorder(new CompoundBorder(new LineBorder(new Color(172, 163, 175)), new EmptyBorder(5, 5, 5, 5)));
 		giornoscad.setBackground(Color.WHITE);
-		giornoscad.setBounds(19, 386, 80, 27);
+		giornoscad.setBounds(19, 319, 80, 27);
 		getContentPane().add(giornoscad);
 		
 		JLabel lblScadenza = new JLabel("SCADENZA");
 		lblScadenza.setForeground(new Color(172, 163, 175));
 		lblScadenza.setFont(new Font("Helvetica", Font.PLAIN, 13));
-		lblScadenza.setBounds(19, 358, 450, 13);
+		lblScadenza.setBounds(19, 291, 450, 13);
 		getContentPane().add(lblScadenza);
 		
 		mesescad = new JTextField();
@@ -104,7 +104,7 @@ public class NuovoConto extends JFrame {
 		mesescad.setColumns(10);
 		mesescad.setBorder(new CompoundBorder(new LineBorder(new Color(172, 163, 175)), new EmptyBorder(5, 5, 5, 5)));
 		mesescad.setBackground(Color.WHITE);
-		mesescad.setBounds(108, 386, 80, 27);
+		mesescad.setBounds(108, 319, 80, 27);
 		getContentPane().add(mesescad);
 		
 		annoscad = new JTextField();
@@ -112,13 +112,13 @@ public class NuovoConto extends JFrame {
 		annoscad.setColumns(10);
 		annoscad.setBorder(new CompoundBorder(new LineBorder(new Color(172, 163, 175)), new EmptyBorder(5, 5, 5, 5)));
 		annoscad.setBackground(Color.WHITE);
-		annoscad.setBounds(197, 386, 80, 27);
+		annoscad.setBounds(197, 319, 80, 27);
 		getContentPane().add(annoscad);
 		
 		JLabel lblGiorno = new JLabel("GIORNO                MESE                    ANNO");
 		lblGiorno.setForeground(new Color(172, 163, 175));
 		lblGiorno.setFont(new Font("Helvetica", Font.PLAIN, 10));
-		lblGiorno.setBounds(19, 375, 267, 13);
+		lblGiorno.setBounds(19, 308, 267, 13);
 		getContentPane().add(lblGiorno);
 		
 		cvv = new JTextField();
@@ -126,32 +126,32 @@ public class NuovoConto extends JFrame {
 		cvv.setColumns(10);
 		cvv.setBorder(new CompoundBorder(new LineBorder(new Color(172, 163, 175)), new EmptyBorder(5, 5, 5, 5)));
 		cvv.setBackground(Color.WHITE);
-		cvv.setBounds(19, 451, 258, 27);
+		cvv.setBounds(19, 387, 258, 27);
 		getContentPane().add(cvv);
 		
 		JLabel lblCodiceDiSicurezza = new JLabel("CODICE DI SICUREZZA");
 		lblCodiceDiSicurezza.setForeground(new Color(172, 163, 175));
 		lblCodiceDiSicurezza.setFont(new Font("Helvetica", Font.PLAIN, 13));
-		lblCodiceDiSicurezza.setBounds(19, 435, 267, 13);
+		lblCodiceDiSicurezza.setBounds(19, 371, 267, 13);
 		getContentPane().add(lblCodiceDiSicurezza);
 		
 		final JComboBox tipoCarta = new JComboBox();
 		tipoCarta.setForeground(new Color(0, 0, 0));
 		tipoCarta.setModel(new DefaultComboBoxModel(new String[] {"Credito", "Debito"}));
 		tipoCarta.setSelectedIndex(0);
-		tipoCarta.setBounds(19, 243, 258, 27);
+		tipoCarta.setBounds(19, 170, 258, 27);
 		getContentPane().add(tipoCarta);
 		
 		final JLabel plafondLbl = new JLabel("PLAFOND");
 		plafondLbl.setForeground(new Color(172, 163, 175));
 		plafondLbl.setFont(new Font("Helvetica", Font.PLAIN, 13));
-		plafondLbl.setBounds(19, 292, 267, 13);
+		plafondLbl.setBounds(19, 224, 267, 13);
 		getContentPane().add(plafondLbl);
 		
 		JButton btnAggiungi = new JButton("+ Aggiungi");
 		btnAggiungi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(iban.getText().isEmpty() || saldo.getText().isEmpty() || numcarta.getText().isEmpty() || giornoscad.getText().isEmpty() || mesescad.getText().isEmpty() || annoscad.getText().isEmpty() || cvv.getText().isEmpty() || limite_plafond.getText().isEmpty()) {
+				if(iban.getText().isEmpty() || numcarta.getText().isEmpty() || giornoscad.getText().isEmpty() || mesescad.getText().isEmpty() || annoscad.getText().isEmpty() || cvv.getText().isEmpty() || limite_plafond.getText().isEmpty()) {
 					JOptionPane.showMessageDialog(null, "Devi compilare tutti i campi");
 					return;
 				}
@@ -177,7 +177,7 @@ public class NuovoConto extends JFrame {
 					
 					cc.setCarta(c);
 					cc.setIban(iban.getText());
-					cc.setSaldo(Double.parseDouble(saldo.getText()));
+					cc.setSaldo(0);
 					
 					utente.addContoCorrente(cc, c);
 					
@@ -197,13 +197,13 @@ public class NuovoConto extends JFrame {
 		btnAggiungi.setFont(new Font("Helvetica", Font.PLAIN, 14));
 		btnAggiungi.setBorderPainted(false);
 		btnAggiungi.setBackground(new Color(53, 45, 72));
-		btnAggiungi.setBounds(19, 502, 258, 30);
+		btnAggiungi.setBounds(19, 430, 258, 30);
 		getContentPane().add(btnAggiungi);
 		
 		JLabel lblTipoCarta = new JLabel("TIPO CARTA");
 		lblTipoCarta.setForeground(new Color(172, 163, 175));
 		lblTipoCarta.setFont(new Font("Helvetica", Font.PLAIN, 13));
-		lblTipoCarta.setBounds(19, 230, 267, 13);
+		lblTipoCarta.setBounds(19, 157, 267, 13);
 		getContentPane().add(lblTipoCarta);
 		
 		limite_plafond = new JTextField();
@@ -211,7 +211,7 @@ public class NuovoConto extends JFrame {
 		limite_plafond.setColumns(10);
 		limite_plafond.setBorder(new CompoundBorder(new LineBorder(new Color(172, 163, 175)), new EmptyBorder(5, 5, 5, 5)));
 		limite_plafond.setBackground(Color.WHITE);
-		limite_plafond.setBounds(19, 308, 258, 27);
+		limite_plafond.setBounds(19, 240, 258, 27);
 		getContentPane().add(limite_plafond);
 		
 		tipoCarta.addActionListener(new ActionListener() {

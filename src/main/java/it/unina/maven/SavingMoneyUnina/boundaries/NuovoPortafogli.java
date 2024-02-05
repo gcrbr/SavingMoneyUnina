@@ -75,6 +75,7 @@ public class NuovoPortafogli extends JFrame {
 			checkBxCat.setForeground(new Color(255, 255, 255));
 			checkBxCat.setFont(new Font("Helvetica", Font.PLAIN, 13));
 			checkBxCat.setBounds(298, 34+33*i, 128, 23);
+			checkBxCat.setBackground(new Color(28, 21, 40));
 			categorie_scelte.add(checkBxCat);
 			getContentPane().add(checkBxCat);
 			setTitle("Crea un nuovo portafogli");

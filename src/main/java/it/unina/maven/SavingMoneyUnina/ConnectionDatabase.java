@@ -13,9 +13,9 @@ public class ConnectionDatabase {
 	}
 
 	private void inizializzaConnessione() {
-		String url = "jdbc:postgresql://localhost:5432/postgres";
+		String url = "jdbc:postgresql://ep-hidden-glitter-a20zui75-pooler.eu-central-1.aws.neon.tech/progetto?user=admin&password=quHyp8ENF6lB&sslmode=require";
 		try {
-			this.con = DriverManager.getConnection(url,"postgres","diocane");
+			this.con = DriverManager.getConnection(url,"admin","quHyp8ENF6lB");
 			this.con.prepareStatement("SET search_path = \"SavingMoneyUnina\"").execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
