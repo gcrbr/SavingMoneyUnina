@@ -59,7 +59,7 @@ CREATE FUNCTION "SavingMoneyUnina".calcola_saldo_totale(emailutente character va
 $$;
 
 
-ALTER FUNCTION "SavingMoneyUnina".calcola_saldo_totale(emailutente character varying) OWNER TO postgres;
+ALTER FUNCTION "SavingMoneyUnina".calcola_saldo_totale(emailutente character varying) OWNER TO admin;
 
 --
 -- TOC entry 232 (class 1255 OID 16526)
@@ -81,7 +81,7 @@ CREATE PROCEDURE "SavingMoneyUnina".crea_nuovo_conto(IN iban character varying, 
 $$;
 
 
-ALTER PROCEDURE "SavingMoneyUnina".crea_nuovo_conto(IN iban character varying, IN saldo double precision, IN num_carta character varying, IN scadenza date, IN cvv character varying, IN tipo_carta character varying, IN limite double precision, IN email character varying) OWNER TO postgres;
+ALTER PROCEDURE "SavingMoneyUnina".crea_nuovo_conto(IN iban character varying, IN saldo double precision, IN num_carta character varying, IN scadenza date, IN cvv character varying, IN tipo_carta character varying, IN limite double precision, IN email character varying) OWNER TO admin;
 
 --
 -- TOC entry 245 (class 1255 OID 16544)
@@ -104,7 +104,7 @@ CREATE FUNCTION "SavingMoneyUnina".get_parolechiave_string(portafogli integer) R
 $$;
 
 
-ALTER FUNCTION "SavingMoneyUnina".get_parolechiave_string(portafogli integer) OWNER TO postgres;
+ALTER FUNCTION "SavingMoneyUnina".get_parolechiave_string(portafogli integer) OWNER TO admin;
 
 --
 -- TOC entry 229 (class 1255 OID 16399)
@@ -132,7 +132,7 @@ BEGIN
 $$;
 
 
-ALTER PROCEDURE "SavingMoneyUnina".inserisci_parolechiave_multiple(IN portafogli integer, IN lista character varying) OWNER TO postgres;
+ALTER PROCEDURE "SavingMoneyUnina".inserisci_parolechiave_multiple(IN portafogli integer, IN lista character varying) OWNER TO admin;
 
 --
 -- TOC entry 246 (class 1255 OID 16528)
@@ -188,7 +188,7 @@ CREATE PROCEDURE "SavingMoneyUnina".inserisci_transazione(IN ibanconto character
 $$;
 
 
-ALTER PROCEDURE "SavingMoneyUnina".inserisci_transazione(IN ibanconto character varying, IN tipo character varying, IN valore double precision, IN data date, IN descrizione character varying, IN altroiban character varying) OWNER TO postgres;
+ALTER PROCEDURE "SavingMoneyUnina".inserisci_transazione(IN ibanconto character varying, IN tipo character varying, IN valore double precision, IN data date, IN descrizione character varying, IN altroiban character varying) OWNER TO admin;
 
 --
 -- TOC entry 248 (class 1255 OID 16542)
@@ -239,7 +239,7 @@ END;
 $$;
 
 
-ALTER FUNCTION "SavingMoneyUnina".limitespesa_plafond_check() OWNER TO postgres;
+ALTER FUNCTION "SavingMoneyUnina".limitespesa_plafond_check() OWNER TO admin;
 
 --
 -- TOC entry 244 (class 1255 OID 16540)
@@ -301,7 +301,7 @@ END;
 $$;
 
 
-ALTER FUNCTION "SavingMoneyUnina".limitespesa_plafond_check_f() OWNER TO postgres;
+ALTER FUNCTION "SavingMoneyUnina".limitespesa_plafond_check_f() OWNER TO admin;
 
 --
 -- TOC entry 250 (class 1255 OID 16568)
@@ -323,7 +323,7 @@ CREATE FUNCTION "SavingMoneyUnina".no_duplicati_portafogli_f() RETURNS trigger
 $$;
 
 
-ALTER FUNCTION "SavingMoneyUnina".no_duplicati_portafogli_f() OWNER TO postgres;
+ALTER FUNCTION "SavingMoneyUnina".no_duplicati_portafogli_f() OWNER TO admin;
 
 --
 -- TOC entry 230 (class 1255 OID 16402)
@@ -353,7 +353,7 @@ END;
 $$;
 
 
-ALTER FUNCTION "SavingMoneyUnina".parolechiave_limite_check_f() OWNER TO postgres;
+ALTER FUNCTION "SavingMoneyUnina".parolechiave_limite_check_f() OWNER TO admin;
 
 --
 -- TOC entry 249 (class 1255 OID 16567)
@@ -447,7 +447,7 @@ CREATE FUNCTION "SavingMoneyUnina".report_mensile(mese integer, anno integer, ut
 $$;
 
 
-ALTER FUNCTION "SavingMoneyUnina".report_mensile(mese integer, anno integer, utente character varying) OWNER TO postgres;
+ALTER FUNCTION "SavingMoneyUnina".report_mensile(mese integer, anno integer, utente character varying) OWNER TO admin;
 
 --
 -- TOC entry 247 (class 1255 OID 16548)
@@ -470,7 +470,7 @@ CREATE FUNCTION "SavingMoneyUnina".sincronizzazione_automatica_f() RETURNS trigg
 $$;
 
 
-ALTER FUNCTION "SavingMoneyUnina".sincronizzazione_automatica_f() OWNER TO postgres;
+ALTER FUNCTION "SavingMoneyUnina".sincronizzazione_automatica_f() OWNER TO admin;
 
 SET default_tablespace = '';
 
@@ -493,7 +493,7 @@ CREATE TABLE "SavingMoneyUnina".carta (
 );
 
 
-ALTER TABLE "SavingMoneyUnina".carta OWNER TO postgres;
+ALTER TABLE "SavingMoneyUnina".carta OWNER TO admin;
 
 --
 -- TOC entry 218 (class 1259 OID 16410)
@@ -505,7 +505,7 @@ CREATE TABLE "SavingMoneyUnina".categoria (
 );
 
 
-ALTER TABLE "SavingMoneyUnina".categoria OWNER TO postgres;
+ALTER TABLE "SavingMoneyUnina".categoria OWNER TO admin;
 
 --
 -- TOC entry 219 (class 1259 OID 16415)
@@ -520,7 +520,7 @@ CREATE TABLE "SavingMoneyUnina".contocorrente (
 );
 
 
-ALTER TABLE "SavingMoneyUnina".contocorrente OWNER TO postgres;
+ALTER TABLE "SavingMoneyUnina".contocorrente OWNER TO admin;
 
 --
 -- TOC entry 220 (class 1259 OID 16420)
@@ -533,7 +533,7 @@ CREATE TABLE "SavingMoneyUnina".parolachiave (
 );
 
 
-ALTER TABLE "SavingMoneyUnina".parolachiave OWNER TO postgres;
+ALTER TABLE "SavingMoneyUnina".parolachiave OWNER TO admin;
 
 --
 -- TOC entry 221 (class 1259 OID 16425)
@@ -550,7 +550,7 @@ CREATE TABLE "SavingMoneyUnina".persona (
 );
 
 
-ALTER TABLE "SavingMoneyUnina".persona OWNER TO postgres;
+ALTER TABLE "SavingMoneyUnina".persona OWNER TO admin;
 
 --
 -- TOC entry 222 (class 1259 OID 16430)
@@ -564,7 +564,7 @@ CREATE TABLE "SavingMoneyUnina".portafogli (
 );
 
 
-ALTER TABLE "SavingMoneyUnina".portafogli OWNER TO postgres;
+ALTER TABLE "SavingMoneyUnina".portafogli OWNER TO admin;
 
 --
 -- TOC entry 223 (class 1259 OID 16435)
@@ -577,7 +577,7 @@ CREATE TABLE "SavingMoneyUnina".portafogli_categoria (
 );
 
 
-ALTER TABLE "SavingMoneyUnina".portafogli_categoria OWNER TO postgres;
+ALTER TABLE "SavingMoneyUnina".portafogli_categoria OWNER TO admin;
 
 --
 -- TOC entry 224 (class 1259 OID 16440)
@@ -611,7 +611,7 @@ CREATE TABLE "SavingMoneyUnina".transazione (
 );
 
 
-ALTER TABLE "SavingMoneyUnina".transazione OWNER TO postgres;
+ALTER TABLE "SavingMoneyUnina".transazione OWNER TO admin;
 
 --
 -- TOC entry 226 (class 1259 OID 16447)
@@ -639,7 +639,7 @@ CREATE TABLE "SavingMoneyUnina".transazione_portafogli (
 );
 
 
-ALTER TABLE "SavingMoneyUnina".transazione_portafogli OWNER TO postgres;
+ALTER TABLE "SavingMoneyUnina".transazione_portafogli OWNER TO admin;
 
 --
 -- TOC entry 228 (class 1259 OID 16451)
@@ -653,7 +653,7 @@ CREATE TABLE "SavingMoneyUnina".utente (
 );
 
 
-ALTER TABLE "SavingMoneyUnina".utente OWNER TO postgres;
+ALTER TABLE "SavingMoneyUnina".utente OWNER TO admin;
 
 --
 -- TOC entry 3667 (class 0 OID 16403)

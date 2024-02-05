@@ -32,6 +32,38 @@ public class NuovaTransazione extends JFrame {
 	private JTextField textField_5;
 	private Controller controller = new Controller();
 	
+	public void setIban(String i) {
+		textField.setText(i);
+	}
+	
+	public void setImporto(String i) {
+		textField_1.setText(i);
+	}
+	
+	public void setDescrizione(String d) {
+		textField_2.setText(d);
+	}
+	
+	public void setTipo(String t) {
+		if(t.equals("entrata")) {
+			comboBox.setSelectedIndex(0);
+		}else {
+			comboBox.setSelectedIndex(1);
+		}
+	}
+	
+	public void setGiorno(String g) {
+		textField_3.setText(g);
+	}
+	
+	public void setMese(String m) {
+		textField_4.setText(m);
+	}
+	
+	public void setAnno(String a) {
+		textField_5.setText(a);
+	}
+	
 	public NuovaTransazione(final JFrame caller, final ContoCorrente cc) {
 		setResizable(false);
 		setTitle("Aggiungi transazione");
