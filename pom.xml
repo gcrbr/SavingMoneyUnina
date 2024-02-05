@@ -56,7 +56,7 @@
           <configuration>
 			  <archive>
 				  <manifest>
-					  <addClassPath>true</addClassPath>
+					  <addClasspath>true</addClasspath>
 					  <mainClass>it.unina.maven.SavingMoneyUnina.boundaries.Login</mainClass>
 				  </manifest>
 			  </archive>
