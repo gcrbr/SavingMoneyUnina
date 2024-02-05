@@ -21,7 +21,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import it.unina.maven.SavingMoneyUnina.ConnectionDatabase;
-import it.unina.maven.SavingMoneyUnina.control.Controller;
+import it.unina.maven.SavingMoneyUnina.control.LoginController;
+import it.unina.maven.SavingMoneyUnina.control.NavigationController;
 import it.unina.maven.SavingMoneyUnina.entities.Utente;
 
 public class Login extends JFrame {
@@ -34,7 +35,8 @@ public class Login extends JFrame {
 	private JLabel lblNewLabel_2;
 
 	ConnectionDatabase c = new ConnectionDatabase();
-	Controller controller = new Controller();
+	LoginController l_controller = new LoginController();
+	NavigationController n_controller = new NavigationController();
 	
 	/**
 	 * Launch the application.
@@ -77,10 +79,10 @@ public class Login extends JFrame {
 				if(!email.getText().equals("") && password.getPassword().length != 0){
 					Utente utenteLoggato;
 					try {
-						utenteLoggato = controller.checkLoginCredentials(email.getText(), password.getText());
+						utenteLoggato = l_controller.checkLoginCredentials(email.getText(), password.getText());
 						if(utenteLoggato != null){
 							setVisible(false);
-							controller.showHomePage(utenteLoggato);
+							n_controller.showHomePage(utenteLoggato);
 						}
 						else {
 							JOptionPane.showMessageDialog(null, "Credenziali errate");

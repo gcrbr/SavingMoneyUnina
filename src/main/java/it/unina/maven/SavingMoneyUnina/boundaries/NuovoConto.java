@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.sql.SQLException;
 
 import javax.swing.DefaultComboBoxModel;
@@ -18,7 +17,8 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import it.unina.maven.SavingMoneyUnina.control.Controller;
+import it.unina.maven.SavingMoneyUnina.control.DataController;
+import it.unina.maven.SavingMoneyUnina.control.NavigationController;
 import it.unina.maven.SavingMoneyUnina.entities.Carta;
 import it.unina.maven.SavingMoneyUnina.entities.ContoCorrente;
 import it.unina.maven.SavingMoneyUnina.entities.Utente;
@@ -32,7 +32,9 @@ public class NuovoConto extends JFrame {
 	private JTextField annoscad;
 	private JTextField cvv;
 	private JTextField limite_plafond;
-	private Controller controller = new Controller();
+	
+	private NavigationController n_controller = new NavigationController();
+	private DataController d_controller = new DataController();
 	
 	public NuovoConto(final JFrame caller, final Utente utente) {
 		setResizable(false);
@@ -159,7 +161,7 @@ public class NuovoConto extends JFrame {
 				try {
 					Carta c = new Carta();
 					c.setNumero(numcarta.getText());
-					c.setScadenza(controller.getDate(
+					c.setScadenza(d_controller.getDate(
 							Integer.parseInt(annoscad.getText()),
 							Integer.parseInt(mesescad.getText()),
 							Integer.parseInt(giornoscad.getText())

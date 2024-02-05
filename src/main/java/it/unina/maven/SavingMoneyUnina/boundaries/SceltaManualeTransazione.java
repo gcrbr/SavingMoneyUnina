@@ -17,14 +17,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
-import it.unina.maven.SavingMoneyUnina.control.Controller;
+import it.unina.maven.SavingMoneyUnina.control.DataController;
+import it.unina.maven.SavingMoneyUnina.control.NavigationController;
 import it.unina.maven.SavingMoneyUnina.entities.ContoCorrente;
 import it.unina.maven.SavingMoneyUnina.entities.Portafogli;
 import it.unina.maven.SavingMoneyUnina.entities.Transazione;
 import it.unina.maven.SavingMoneyUnina.entities.Utente;
 
 public class SceltaManualeTransazione extends JFrame {
-	private Controller controller = new Controller();
+	private NavigationController n_controller = new NavigationController();
+	private DataController d_controller = new DataController();
 	
 	public SceltaManualeTransazione(final JFrame caller, final Utente u, final Portafogli p) {
 		setResizable(false);
@@ -81,7 +83,7 @@ public class SceltaManualeTransazione extends JFrame {
 				bloccoConto.add(bloccoTransazione);
 				bloccoTransazione.setLayout(null);
 				
-				JLabel lblNewLabel_1_1 = new JLabel((t.getTipo().equals("entrata") ? "+" : "-") + " " + controller.formatMoney(t.getValore()));
+				JLabel lblNewLabel_1_1 = new JLabel((t.getTipo().equals("entrata") ? "+" : "-") + " " + d_controller.formatMoney(t.getValore()));
 				lblNewLabel_1_1.setForeground(Color.WHITE);
 				lblNewLabel_1_1.setFont(new Font("Helvetica", Font.BOLD, 13));
 				lblNewLabel_1_1.setBounds(16, 6, 300, 25);
@@ -93,7 +95,7 @@ public class SceltaManualeTransazione extends JFrame {
 				lblNewLabel_1_1_1.setBounds(16, 22, 292, 25);
 				bloccoTransazione.add(lblNewLabel_1_1_1);
 				
-				JLabel lblNewLabel_1_2_4 = new JLabel(controller.dateToString(t.getData()));
+				JLabel lblNewLabel_1_2_4 = new JLabel(d_controller.dateToString(t.getData()));
 				lblNewLabel_1_2_4.setForeground(new Color(255, 255, 255));
 				lblNewLabel_1_2_4.setFont(new Font("Helvetica", Font.ITALIC, 13));
 				lblNewLabel_1_2_4.setBackground(Color.WHITE);

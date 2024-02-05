@@ -17,7 +17,8 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import it.unina.maven.SavingMoneyUnina.control.Controller;
+import it.unina.maven.SavingMoneyUnina.control.DataController;
+import it.unina.maven.SavingMoneyUnina.control.NavigationController;
 import it.unina.maven.SavingMoneyUnina.entities.Categoria;
 import it.unina.maven.SavingMoneyUnina.entities.Portafogli;
 import it.unina.maven.SavingMoneyUnina.entities.Utente;
@@ -25,7 +26,8 @@ import it.unina.maven.SavingMoneyUnina.entities.Utente;
 public class NuovoPortafogli extends JFrame {
 	private JTextField textField;
 	private JTextField textField_1;
-	private Controller controller = new Controller();
+	private NavigationController n_controller = new NavigationController();
+	private DataController d_controller = new DataController();
 	
 	public NuovoPortafogli(final JFrame caller, final Utente u) {
 		setResizable(false);
@@ -68,7 +70,7 @@ public class NuovoPortafogli extends JFrame {
 		lblCategorie.setBounds(299, 18, 267, 13);
 		getContentPane().add(lblCategorie);
 		
-		ArrayList<Categoria> categorie = controller.getCategorie();
+		ArrayList<Categoria> categorie = d_controller.getCategorie();
 		final ArrayList<JCheckBox> categorie_scelte = new ArrayList<>();
 		for(int i=0;i<categorie.size();++i) {
 			JCheckBox checkBxCat = new JCheckBox(categorie.get(i).getNome());

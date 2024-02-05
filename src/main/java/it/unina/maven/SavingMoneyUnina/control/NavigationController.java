@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import it.unina.maven.SavingMoneyUnina.boundaries.Home;
 import it.unina.maven.SavingMoneyUnina.boundaries.InformazioniConto;
@@ -25,21 +26,7 @@ import it.unina.maven.SavingMoneyUnina.entities.Utente;
 import it.unina.maven.SavingMoneyUnina.entities.dao.CategoriaDao;
 import it.unina.maven.SavingMoneyUnina.entities.dao.UtenteDao;
 
-public class Controller {
-	
-	public Utente checkLoginCredentials(String email, String password) throws SQLException {
-		Utente loggedUser = new UtenteDao().getUtenteByEmail(email);
-		if(loggedUser == null) return null;
-		if(loggedUser.getPassword().equals(password)) {
-			return loggedUser;
-		}else {
-			return null;
-		}
-	}
-	
-	public String formatMoney(double money) {
-		return NumberFormat.getCurrencyInstance().format(money);
-	}
+public class NavigationController {
 	
 	public void showHomePage(Utente u) {
 		Home h = new Home(u);
@@ -76,15 +63,6 @@ public class Controller {
 		np.setVisible(true);
 	}
 	
-	public ArrayList<Categoria> getCategorie() {
-		try {
-			return new CategoriaDao().getCategorie();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	
 	public void showRicercaAvanzata(Utente u) {
 		RicercaAvanzata ra = new RicercaAvanzata(u);
 		ra.setVisible(true);
@@ -95,19 +73,8 @@ public class Controller {
 		rm.setVisible(true);
 	}
 	
-	public Date getDate(int anno, int mese, int giorno) {
-		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.YEAR, anno);
-		cal.set(Calendar.MONTH, mese - 1);
-		cal.set(Calendar.DAY_OF_MONTH, giorno);
-		cal.set(Calendar.HOUR, 0);
-		cal.set(Calendar.MINUTE, 0);
-		cal.set(Calendar.SECOND, 0);
-		return new Date(cal.getTimeInMillis());
-	}
-	
-	public String dateToString(Date date) {
-		return new SimpleDateFormat("dd/MM/yyyy").format(date);
+	public void showAlert(String text) {
+		JOptionPane.showMessageDialog(null, text);
 	}
 	
 }

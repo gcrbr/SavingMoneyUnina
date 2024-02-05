@@ -20,7 +20,8 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 
-import it.unina.maven.SavingMoneyUnina.control.Controller;
+import it.unina.maven.SavingMoneyUnina.control.DataController;
+import it.unina.maven.SavingMoneyUnina.control.NavigationController;
 import it.unina.maven.SavingMoneyUnina.entities.ContoCorrente;
 import it.unina.maven.SavingMoneyUnina.entities.Portafogli;
 import it.unina.maven.SavingMoneyUnina.entities.Utente;
@@ -29,8 +30,9 @@ public class Home extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private Controller controller = new Controller();
-
+	private NavigationController n_controller = new NavigationController();
+	private DataController d_controller = new DataController();
+	
 	private final Utente utente;
 	
 	public Home(final Utente utente) {
@@ -64,7 +66,7 @@ public class Home extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel(controller.formatMoney(utente.getSaldoTotaleConti()));
+		JLabel lblNewLabel = new JLabel(d_controller.formatMoney(utente.getSaldoTotaleConti()));
 		lblNewLabel.setBounds(23, 6, 193, 46);
 		panel.add(lblNewLabel);
 		lblNewLabel.setFont(new Font("Helvetica", Font.BOLD, 20));
@@ -73,7 +75,7 @@ public class Home extends JFrame {
 		JButton btnVediReportMensile = new JButton("Vedi report mensile");
 		btnVediReportMensile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.showReportMensile(utente);
+				n_controller.showReportMensile(utente);
 			}
 		});
 		btnVediReportMensile.setBounds(6, 53, 193, 28);
@@ -107,7 +109,7 @@ public class Home extends JFrame {
 		JButton btnAggiungiConto = new JButton("+ Aggiungi conto");
 		btnAggiungiConto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.showNuovoConto(Home.this, utente);
+				n_controller.showNuovoConto(Home.this, utente);
 			}
 		});
 		btnAggiungiConto.setOpaque(true);
@@ -141,7 +143,7 @@ public class Home extends JFrame {
 		JButton Accedi = new JButton("+ Crea portafogli");
 		Accedi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.showNuovoPortafogli(Home.this, utente);
+				n_controller.showNuovoPortafogli(Home.this, utente);
 			}
 		});
 		Accedi.setOpaque(true);
@@ -271,7 +273,7 @@ public class Home extends JFrame {
 			
 			MouseAdapter info2 = new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
-					controller.showInformazioniPortafogli(utente, px);
+					n_controller.showInformazioniPortafogli(utente, px);
 				}
 			};
 			
@@ -331,7 +333,7 @@ public class Home extends JFrame {
 			
 			MouseAdapter info = new MouseAdapter() {
 				public void mouseClicked(MouseEvent e) {
-					controller.showInformazioniConto(Home.this, cx);
+					n_controller.showInformazioniConto(Home.this, cx);
 				}
 			};
 			

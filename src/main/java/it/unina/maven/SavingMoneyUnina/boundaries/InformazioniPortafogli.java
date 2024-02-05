@@ -17,14 +17,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
-import it.unina.maven.SavingMoneyUnina.control.Controller;
+import it.unina.maven.SavingMoneyUnina.control.DataController;
+import it.unina.maven.SavingMoneyUnina.control.NavigationController;
 import it.unina.maven.SavingMoneyUnina.entities.Categoria;
 import it.unina.maven.SavingMoneyUnina.entities.Portafogli;
 import it.unina.maven.SavingMoneyUnina.entities.Transazione;
 import it.unina.maven.SavingMoneyUnina.entities.Utente;
 
 public class InformazioniPortafogli extends JFrame {
-	private Controller controller = new Controller();
+	private NavigationController n_controller = new NavigationController();
+	private DataController d_controller = new DataController();
 	
 	private final Utente u;
 	private final Portafogli p;
@@ -65,7 +67,7 @@ public class InformazioniPortafogli extends JFrame {
 		JButton btnInserisciTransazione = new JButton("+ Inserisci transazione");
 		btnInserisciTransazione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.showSceltaManuale(InformazioniPortafogli.this, u, p);
+				n_controller.showSceltaManuale(InformazioniPortafogli.this, u, p);
 			}
 		});
 		btnInserisciTransazione.setOpaque(true);
@@ -79,7 +81,7 @@ public class InformazioniPortafogli extends JFrame {
 		JButton btnRicercaAvanzata = new JButton("Ricerca avanzata");
 		btnRicercaAvanzata.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.showRicercaAvanzata(u);
+				n_controller.showRicercaAvanzata(u);
 			}
 		});
 		btnRicercaAvanzata.setOpaque(true);
@@ -177,7 +179,7 @@ public class InformazioniPortafogli extends JFrame {
 			panel_3_1.setBounds(2, 6+73*i, 350, 63);
 			panel_2_1.add(panel_3_1);
 			
-			JLabel lblNewLabel_1_2_3 = new JLabel((t.getTipo().equals("entrata") ? "+" : "-") + " " + controller.formatMoney(t.getValore()));
+			JLabel lblNewLabel_1_2_3 = new JLabel((t.getTipo().equals("entrata") ? "+" : "-") + " " + d_controller.formatMoney(t.getValore()));
 			lblNewLabel_1_2_3.setForeground(Color.WHITE);
 			lblNewLabel_1_2_3.setFont(new Font("Helvetica", Font.BOLD, 14));
 			lblNewLabel_1_2_3.setBackground(Color.WHITE);
@@ -191,7 +193,7 @@ public class InformazioniPortafogli extends JFrame {
 			lblNewLabel_1_2_1.setBounds(6, 24, 350, 13);
 			panel_3_1.add(lblNewLabel_1_2_1);
 			
-			JLabel lblNewLabel_1_2_4 = new JLabel(controller.dateToString(t.getData()));
+			JLabel lblNewLabel_1_2_4 = new JLabel(d_controller.dateToString(t.getData()));
 			lblNewLabel_1_2_4.setForeground(new Color(255, 255, 255));
 			lblNewLabel_1_2_4.setFont(new Font("Helvetica", Font.ITALIC, 13));
 			lblNewLabel_1_2_4.setBackground(Color.WHITE);

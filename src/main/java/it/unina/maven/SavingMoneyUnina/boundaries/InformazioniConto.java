@@ -17,13 +17,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
-import it.unina.maven.SavingMoneyUnina.control.Controller;
+import it.unina.maven.SavingMoneyUnina.control.DataController;
+import it.unina.maven.SavingMoneyUnina.control.NavigationController;
 import it.unina.maven.SavingMoneyUnina.entities.Carta;
 import it.unina.maven.SavingMoneyUnina.entities.ContoCorrente;
 import it.unina.maven.SavingMoneyUnina.entities.Transazione;
 
 public class InformazioniConto extends JFrame {
-	private Controller controller = new Controller();
+	private NavigationController n_controller = new NavigationController();
+	private DataController d_controller = new DataController();
 	
 	private final JFrame caller;
 	private final ContoCorrente cc;
@@ -49,7 +51,7 @@ public class InformazioniConto extends JFrame {
 		panel.setBounds(17, 40, 210, 50);
 		getContentPane().add(panel);
 		
-		JLabel lblNewLabel = new JLabel(controller.formatMoney(cc.getSaldo()));
+		JLabel lblNewLabel = new JLabel(d_controller.formatMoney(cc.getSaldo()));
 		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setFont(new Font("Helvetica", Font.BOLD, 20));
 		lblNewLabel.setBounds(23, 6, 181, 38);
@@ -115,7 +117,7 @@ public class InformazioniConto extends JFrame {
 		lblNewLabel_1_1_1_1_1_2.setBounds(16, 165, 105, 20);
 		panel_1.add(lblNewLabel_1_1_1_1_1_2);
 		
-		JLabel lblPla = new JLabel(controller.formatMoney(c.getTipo().equals("credito") ? c.getPlafond() : c.getLimitespesa()).toString());
+		JLabel lblPla = new JLabel(d_controller.formatMoney(c.getTipo().equals("credito") ? c.getPlafond() : c.getLimitespesa()).toString());
 		lblPla.setForeground(Color.WHITE);
 		lblPla.setFont(new Font("Helvetica", Font.PLAIN, 12));
 		lblPla.setBounds(16, 179, 181, 24);
@@ -150,7 +152,7 @@ public class InformazioniConto extends JFrame {
 			panel_3_1.setBounds(2, 6+73*i, 350, 63);
 			panel_2_1.add(panel_3_1);
 			
-			JLabel lblNewLabel_1_2_3 = new JLabel((t.getTipo().equals("entrata") ? "+" : "-") + " " + controller.formatMoney(t.getValore()));
+			JLabel lblNewLabel_1_2_3 = new JLabel((t.getTipo().equals("entrata") ? "+" : "-") + " " + d_controller.formatMoney(t.getValore()));
 			lblNewLabel_1_2_3.setForeground(Color.WHITE);
 			lblNewLabel_1_2_3.setFont(new Font("Helvetica", Font.BOLD, 14));
 			lblNewLabel_1_2_3.setBackground(Color.WHITE);
@@ -164,7 +166,7 @@ public class InformazioniConto extends JFrame {
 			lblNewLabel_1_2_1.setBounds(6, 24, 350, 13);
 			panel_3_1.add(lblNewLabel_1_2_1);
 			
-			JLabel lblNewLabel_1_2_4 = new JLabel(controller.dateToString(t.getData()));
+			JLabel lblNewLabel_1_2_4 = new JLabel(d_controller.dateToString(t.getData()));
 			lblNewLabel_1_2_4.setForeground(new Color(255, 255, 255));
 			lblNewLabel_1_2_4.setFont(new Font("Helvetica", Font.ITALIC, 13));
 			lblNewLabel_1_2_4.setBackground(Color.WHITE);
@@ -203,7 +205,7 @@ public class InformazioniConto extends JFrame {
 		JButton btnInserisciTransazione = new JButton("+ Inserisci transazione");
 		btnInserisciTransazione.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.showNuovaTransazione(InformazioniConto.this, cc);
+				n_controller.showNuovaTransazione(InformazioniConto.this, cc);
 			}
 		});
 		btnInserisciTransazione.setOpaque(true);
@@ -217,7 +219,7 @@ public class InformazioniConto extends JFrame {
 		JButton btnRicercaAvanzata = new JButton("Ricerca avanzata");
 		btnRicercaAvanzata.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.showRicercaAvanzata(cc.getUtente());
+				n_controller.showRicercaAvanzata(cc.getUtente());
 			}
 		});
 		btnRicercaAvanzata.setOpaque(true);

@@ -24,7 +24,8 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import it.unina.maven.SavingMoneyUnina.control.Controller;
+import it.unina.maven.SavingMoneyUnina.control.DataController;
+import it.unina.maven.SavingMoneyUnina.control.NavigationController;
 import it.unina.maven.SavingMoneyUnina.entities.ContoCorrente;
 import it.unina.maven.SavingMoneyUnina.entities.Portafogli;
 import it.unina.maven.SavingMoneyUnina.entities.Transazione;
@@ -41,7 +42,8 @@ public class RicercaAvanzata extends JFrame {
 	
 	private Utente u;
 	
-	private Controller controller = new Controller();
+	private NavigationController n_controller = new NavigationController();
+	private DataController d_controller = new DataController();
 	
 	public RicercaAvanzata(final Utente u) {
 		this.u = u;
@@ -209,12 +211,12 @@ public class RicercaAvanzata extends JFrame {
 					JOptionPane.showMessageDialog(null, "Devi inserire l'intervallo di date");
 					return;
 				}
-				Date date_from = controller.getDate(
+				Date date_from = d_controller.getDate(
 						Integer.parseInt(annoDal.getText()),
 						Integer.parseInt(meseDal.getText()),
 						Integer.parseInt(giornoDal.getText())
 				);
-				Date date_to = controller.getDate(
+				Date date_to = d_controller.getDate(
 						Integer.parseInt(annoAl.getText()),
 						Integer.parseInt(meseAl.getText()),
 						Integer.parseInt(giornoAl.getText())
@@ -258,7 +260,7 @@ public class RicercaAvanzata extends JFrame {
 					panel_3_1.setBounds(2, 6+73*i, 350, 63);
 					panel.add(panel_3_1);
 					
-					JLabel lblNewLabel_1_2_3 = new JLabel((t.getTipo().equals("entrata") ? "+" : "-") + " " + controller.formatMoney(t.getValore()));
+					JLabel lblNewLabel_1_2_3 = new JLabel((t.getTipo().equals("entrata") ? "+" : "-") + " " + d_controller.formatMoney(t.getValore()));
 					lblNewLabel_1_2_3.setForeground(Color.WHITE);
 					lblNewLabel_1_2_3.setFont(new Font("Helvetica", Font.BOLD, 14));
 					lblNewLabel_1_2_3.setBackground(Color.WHITE);
@@ -272,7 +274,7 @@ public class RicercaAvanzata extends JFrame {
 					lblNewLabel_1_2_1.setBounds(6, 24, 350, 13);
 					panel_3_1.add(lblNewLabel_1_2_1);
 					
-					JLabel lblNewLabel_1_2_4 = new JLabel(controller.dateToString(t.getData()));
+					JLabel lblNewLabel_1_2_4 = new JLabel(d_controller.dateToString(t.getData()));
 					lblNewLabel_1_2_4.setForeground(new Color(255, 255, 255));
 					lblNewLabel_1_2_4.setFont(new Font("Helvetica", Font.ITALIC, 13));
 					lblNewLabel_1_2_4.setBackground(Color.WHITE);

@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
@@ -19,7 +18,8 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import it.unina.maven.SavingMoneyUnina.control.Controller;
+import it.unina.maven.SavingMoneyUnina.control.DataController;
+import it.unina.maven.SavingMoneyUnina.control.NavigationController;
 import it.unina.maven.SavingMoneyUnina.entities.ContoCorrente;
 import it.unina.maven.SavingMoneyUnina.entities.Transazione;
 
@@ -30,7 +30,10 @@ public class NuovaTransazione extends JFrame {
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-	private Controller controller = new Controller();
+	final JComboBox comboBox = new JComboBox();
+	
+	private NavigationController n_controller = new NavigationController();
+	private DataController d_controller = new DataController();
 	
 	public void setIban(String i) {
 		textField.setText(i);
@@ -40,7 +43,7 @@ public class NuovaTransazione extends JFrame {
 		textField_1.setText(i);
 	}
 	
-	public void setDescrizione(String d) {
+	public void setDescrizione(String d) {
 		textField_2.setText(d);
 	}
 	
@@ -63,6 +66,39 @@ public class NuovaTransazione extends JFrame {
 	public void setAnno(String a) {
 		textField_5.setText(a);
 	}
+	
+	public String getIban() {
+		return textField.getText();
+	}
+	
+	public String getImporto() {
+		return textField_1.getText();
+	}
+	
+	public String getDescrizione() {
+		return textField_2.getText();
+	}
+	
+	public String getTipo() {
+		return comboBox.getSelectedItem().toString().toLowerCase();
+	}
+	
+	public String getGiorno() {
+		return textField_3.getText();
+	}
+	
+	public String getMese() {
+		return textField_4.getText();
+	}
+	
+	public String getAnno() {
+		return textField_5.getText();
+	}
+	
+	public boolean hasEmptyFields() {
+		return getIban().isEmpty() || getImporto().isEmpty() || getDescrizione().isEmpty() || getTipo().isEmpty() || getGiorno().isEmpty() || getMese().isEmpty() || getAnno().isEmpty();
+	}
+	
 	
 	public NuovaTransazione(final JFrame caller, final ContoCorrente cc) {
 		setResizable(false);
@@ -120,7 +156,6 @@ public class NuovaTransazione extends JFrame {
 		lblTipologia.setBounds(18, 223, 267, 13);
 		getContentPane().add(lblTipologia);
 		
-		final JComboBox comboBox = new JComboBox();
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(comboBox.getSelectedIndex() == 0) {
@@ -150,7 +185,7 @@ public class NuovaTransazione extends JFrame {
 		textField_3.setBackground(Color.WHITE);
 		textField_3.setBounds(18, 315, 80, 27);
 		getContentPane().add(textField_3);
-		textField_3.setText(Integer.toString(oggi.getDayOfMonth()));
+		setGiorno(Integer.toString(oggi.getDayOfMonth()));
 		
 		textField_4 = new JTextField();
 		textField_4.setFont(new Font("Helvetica", Font.PLAIN, 13));
@@ -159,7 +194,7 @@ public class NuovaTransazione extends JFrame {
 		textField_4.setBackground(Color.WHITE);
 		textField_4.setBounds(107, 315, 80, 27);
 		getContentPane().add(textField_4);
-		textField_4.setText(Integer.toString(oggi.getMonthValue()));
+		setMese(Integer.toString(oggi.getMonthValue()));
 		
 		textField_5 = new JTextField();
 		textField_5.setFont(new Font("Helvetica", Font.PLAIN, 13));
@@ -168,7 +203,7 @@ public class NuovaTransazione extends JFrame {
 		textField_5.setBackground(Color.WHITE);
 		textField_5.setBounds(196, 315, 80, 27);
 		getContentPane().add(textField_5);
-		textField_5.setText(Integer.toString(oggi.getYear()));
+		setAnno(Integer.toString(oggi.getYear()));
 		
 		JLabel lblGiorno = new JLabel("GIORNO                MESE                    ANNO");
 		lblGiorno.setForeground(new Color(172, 163, 175));
@@ -180,21 +215,21 @@ public class NuovaTransazione extends JFrame {
 		btnAggiungi.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-				if(textField.getText().isEmpty() || textField_2.getText().isEmpty() || textField_3.getText().isEmpty() || textField_4.getText().isEmpty() || textField_5.getText().isEmpty()) {
+				if(hasEmptyFields()) {
 					JOptionPane.showMessageDialog(null, "Devi compilare tutti i campi");
 					return;
 				}
 				
 				try {
 					Transazione t = new Transazione();
-					t.setAltroIban(textField.getText());
-					t.setValore(Double.parseDouble(textField_1.getText()));
-					t.setDescrizione(textField_2.getText());
-					t.setTipo(comboBox.getSelectedItem().toString().toLowerCase());
-					t.setData(controller.getDate(
-							Integer.parseInt(textField_5.getText()),
-							Integer.parseInt(textField_4.getText()),
-							Integer.parseInt(textField_3.getText())
+					t.setAltroIban(getIban());
+					t.setValore(Double.parseDouble(getImporto()));
+					t.setDescrizione(getDescrizione());
+					t.setTipo(getTipo());
+					t.setData(d_controller.getDate(
+							Integer.parseInt(getAnno()),
+							Integer.parseInt(getMese()),
+							Integer.parseInt(getGiorno())
 					));
 					cc.addTransazione(t);
 					

@@ -18,11 +18,11 @@
   </properties>
 
   <dependencies>
-	  		<dependency>
-                <groupId>org.postgresql</groupId>
-                <artifactId>postgresql</artifactId>
-                <version>42.7.1</version>
-            </dependency>
+	<dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.7.1</version>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -53,6 +53,14 @@
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.0.2</version>
+          <configuration>
+			  <archive>
+				  <manifest>
+					  <addClassPath>true</addClassPath>
+					  <mainClass>it.unina.maven.SavingMoneyUnina.boundaries.Login</mainClass>
+				  </manifest>
+			  </archive>
+		  </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>

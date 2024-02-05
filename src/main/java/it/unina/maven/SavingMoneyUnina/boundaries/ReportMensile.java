@@ -24,14 +24,17 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import it.unina.maven.SavingMoneyUnina.control.Controller;
+import it.unina.maven.SavingMoneyUnina.control.DataController;
+import it.unina.maven.SavingMoneyUnina.control.NavigationController;
 import it.unina.maven.SavingMoneyUnina.entities.Utente;
 
 public class ReportMensile extends JFrame {
 	
 	private Utente u;
 	private JTextField textField;
-	private Controller controller = new Controller();
+	
+	private NavigationController n_controller = new NavigationController();
+	private DataController d_controller = new DataController();
 	
 	public ReportMensile(final Utente u) {
 		this.u=u;
@@ -84,7 +87,7 @@ public class ReportMensile extends JFrame {
 							lbl_2.setBounds(16, 36, 267, 13);
 							panel_1.add(lbl_2);
 							
-							JLabel lbl_3 = new JLabel(controller.formatMoney((Double)conto[1]));
+							JLabel lbl_3 = new JLabel(d_controller.formatMoney((Double)conto[1]));
 							lbl_3.setForeground(new Color(255, 255, 255));
 							lbl_3.setFont(new Font("Helvetica", Font.PLAIN, 13));
 							lbl_3.setBackground(Color.WHITE);
@@ -98,7 +101,7 @@ public class ReportMensile extends JFrame {
 							lbl_4.setBounds(16, 71, 267, 13);
 							panel_1.add(lbl_4);
 							
-							JLabel lbl_5 = new JLabel(controller.formatMoney((Double)conto[2]));
+							JLabel lbl_5 = new JLabel(d_controller.formatMoney((Double)conto[2]));
 							lbl_5.setForeground(new Color(255, 255, 255));
 							lbl_5.setFont(new Font("Helvetica", Font.PLAIN, 13));
 							lbl_5.setBackground(Color.WHITE);
@@ -112,7 +115,7 @@ public class ReportMensile extends JFrame {
 							lbl_6.setBounds(16, 106, 267, 13);
 							panel_1.add(lbl_6);
 							
-							JLabel lbl_7 = new JLabel(controller.formatMoney((Double)conto[3]));
+							JLabel lbl_7 = new JLabel(d_controller.formatMoney((Double)conto[3]));
 							lbl_7.setForeground(new Color(255, 255, 255));
 							lbl_7.setFont(new Font("Helvetica", Font.PLAIN, 13));
 							lbl_7.setBackground(Color.WHITE);
@@ -126,7 +129,7 @@ public class ReportMensile extends JFrame {
 							lbl_2_1.setBounds(-22, 36, 267, 13);
 							panel_1.add(lbl_2_1);
 							
-							JLabel lbl_3_1 = new JLabel(controller.formatMoney((Double)conto[4]), SwingConstants.RIGHT);
+							JLabel lbl_3_1 = new JLabel(d_controller.formatMoney((Double)conto[4]), SwingConstants.RIGHT);
 							lbl_3_1.setForeground(new Color(255, 255, 255));
 							lbl_3_1.setFont(new Font("Helvetica", Font.PLAIN, 13));
 							lbl_3_1.setBackground(Color.WHITE);
@@ -140,7 +143,7 @@ public class ReportMensile extends JFrame {
 							lbl_4_1.setBounds(-22, 71, 267, 13);
 							panel_1.add(lbl_4_1);
 							
-							JLabel lbl_5_1 = new JLabel(controller.formatMoney((Double)conto[5]), SwingConstants.RIGHT);
+							JLabel lbl_5_1 = new JLabel(d_controller.formatMoney((Double)conto[5]), SwingConstants.RIGHT);
 							lbl_5_1.setForeground(new Color(255, 255, 255));
 							lbl_5_1.setFont(new Font("Helvetica", Font.PLAIN, 13));
 							lbl_5_1.setBackground(Color.WHITE);
@@ -154,7 +157,7 @@ public class ReportMensile extends JFrame {
 							lbl_6_1.setBounds(-22, 106, 267, 13);
 							panel_1.add(lbl_6_1);
 							
-							JLabel lbl_7_1 = new JLabel(controller.formatMoney((Double)conto[6]), SwingConstants.RIGHT);
+							JLabel lbl_7_1 = new JLabel(d_controller.formatMoney((Double)conto[6]), SwingConstants.RIGHT);
 							lbl_7_1.setForeground(new Color(255, 255, 255));
 							lbl_7_1.setFont(new Font("Helvetica", Font.PLAIN, 13));
 							lbl_7_1.setBackground(Color.WHITE);
@@ -168,7 +171,7 @@ public class ReportMensile extends JFrame {
 							lbl_8.setBounds(16, 141, 267, 13);
 							panel_1.add(lbl_8);
 							
-							JLabel lbl_9 = new JLabel(controller.formatMoney((Double)conto[7]));
+							JLabel lbl_9 = new JLabel(d_controller.formatMoney((Double)conto[7]));
 							lbl_9.setForeground(new Color(255, 255, 255));
 							lbl_9.setFont(new Font("Helvetica", Font.BOLD, 13));
 							lbl_9.setBackground(Color.WHITE);
@@ -182,7 +185,7 @@ public class ReportMensile extends JFrame {
 							lbl_8_1.setBounds(-22, 141, 267, 13);
 							panel_1.add(lbl_8_1);
 							
-							JLabel lbl_9_1 = new JLabel(controller.formatMoney((Double)conto[8]), SwingConstants.RIGHT);
+							JLabel lbl_9_1 = new JLabel(d_controller.formatMoney((Double)conto[8]), SwingConstants.RIGHT);
 							lbl_9_1.setForeground(new Color(255, 255, 255));
 							lbl_9_1.setFont(new Font("Helvetica", Font.BOLD, 13));
 							lbl_9_1.setBackground(Color.WHITE);
